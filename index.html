@@ -143,11 +143,10 @@ main{min-width:0;display:flex;flex-direction:column;gap:12px}
 .pill.mid small{color:var(--muted);opacity:1}
 .pill.low{background:var(--amber-bg);color:var(--amber)}
 .pill.none{background:var(--surface-2);color:var(--faint);border:1px dashed var(--line-strong)}
-.load{display:inline-grid;grid-template-columns:1fr auto;grid-template-areas:'ll lv' 'dots dots';width:122px;align-items:baseline;gap:3px 6px;font-size:11.5px;color:var(--muted)}
+.load{display:inline-grid;grid-template-columns:auto auto;grid-template-areas:'ll ll' 'dots lv';justify-content:start;align-items:center;gap:3px 7px;font-size:11.5px;color:var(--muted);white-space:nowrap}
 .load .ll{grid-area:ll}
 .load .lv{grid-area:lv}
 .load .dots{grid-area:dots}
-.load .dots i{flex:1}
 .load .ll{color:var(--faint);font-size:9.5px;text-transform:uppercase;letter-spacing:.07em}
 .load .dots{display:inline-flex;gap:2px}
 .load .dots i{display:inline-block;width:11px;height:6px;border-radius:3px;background:var(--bar-bg)}
@@ -202,8 +201,6 @@ main{min-width:0;display:flex;flex-direction:column;gap:12px}
   .head{grid-template-columns:auto minmax(0,1fr)}
   .right{grid-column:1 / -1;padding-left:8px;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:8px}
   .pills{gap:4px}
-  .load{display:inline-flex;align-items:center;width:auto;white-space:nowrap;gap:5px}
-  .load .dots i{flex:none}
   .load .ll{letter-spacing:.03em}
   .load .lv{min-width:0}
   .right .chevron{display:none}
@@ -599,7 +596,7 @@ const pctOf = (v, arr) => { let lo=0,hi=arr.length; while(lo<hi){ const m=(lo+hi
 const tier = (v,label) => { if (v==null) return 'none'; const p = pctOf(v, RANKS[label]); return p>=0.8 ? 'good' : p<0.2 ? 'low' : 'mid'; };
 const tierTip = {good:'top 20% of courses', low:'bottom 20% of courses', mid:'middle 60% of courses', none:''};
 const pill = (v,label,short=label) => `<span class="pill ${tier(v,label)}" title="${label} overall (1–5)${v==null?'':' · '+tierTip[tier(v,label)]}"><b>${v==null?'–':v.toFixed(2)}</b><small>${v==null?'no eval':short}</small></span>`;
-const loadBars = l => { const n = {Low:1,Medium:2,High:3}[l]||0; return l ? `<span class="load" title="Workload: ${l} (thirds of the survey's hours-outside-class score)"><span class="ll">Workload</span><span class="dots">${[1,2,3].map(i=>`<i class="${i<=n?'f':''}"></i>`).join('')}</span><span class="lv">${l}</span></span>` : ''; };
+const loadBars = l => { const n = {Low:1,Medium:2,High:3}[l]||0; return l ? `<span class="load" title="Workload: ${l} (thirds of the survey's hours-outside-class score)"><span class="ll">Workload</span><span class="dots">${[1,2,3].map(i=>`<i class="${i<=n?'f':''}"></i>`).join('')}</span><span class="lv">${l==='Medium'?'Med':l}</span></span>` : ''; };
 
 function head(c){
   const s0 = c.sections[0];
