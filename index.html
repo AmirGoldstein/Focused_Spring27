@@ -16,7 +16,7 @@
   --line:#E2DFEA; --line-strong:#CBC6D8; --accent:#57068C; --accent-soft:#EFE6F7; --accent-ink:#FFFFFF;
   --star:#D99A00; --good:#1D7A4D; --good-bg:#E3F4EA; --mid:#6B5E00; --mid-bg:#F6F0CF; --warn:#A23B1C; --warn-bg:#FBE6DE;
   --chip-s:62%; --chip-l:91%; --chip-ts:55%; --chip-tl:27%; --chip-on-s:52%; --chip-on-l:42%;
-  --bar:#57068C; --bar-bg:#ECE9F2; --term-bg:#E9E8EC; --term-ink:#4A4757;
+  --bar:#57068C; --bar-bg:#ECE9F2; --amber:#B3401A; --amber-bg:#FDE1D5; --term-bg:#E9E8EC; --term-ink:#4A4757;
   --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme: dark){
@@ -26,7 +26,7 @@
     --line:#2D2939; --line-strong:#3E394D; --accent:#B98AE6; --accent-soft:#2C2240; --accent-ink:#17121F;
     --star:#F2B632; --good:#6FD39E; --good-bg:#16311F; --mid:#E4CF6A; --mid-bg:#302B12; --warn:#F09A7C; --warn-bg:#3A1C13;
     --chip-s:32%; --chip-l:21%; --chip-ts:70%; --chip-tl:80%; --chip-on-s:55%; --chip-on-l:60%;
-    --bar:#B98AE6; --bar-bg:#2D2939; --term-bg:#2C2A33; --term-ink:#C7C3D1;
+    --bar:#B98AE6; --bar-bg:#2D2939; --amber:#F4876A; --amber-bg:#40201A; --term-bg:#2C2A33; --term-ink:#C7C3D1;
   }
 }
 :root[data-theme="dark"]{
@@ -35,7 +35,7 @@
   --line:#2D2939; --line-strong:#3E394D; --accent:#B98AE6; --accent-soft:#2C2240; --accent-ink:#17121F;
   --star:#F2B632; --good:#6FD39E; --good-bg:#16311F; --mid:#E4CF6A; --mid-bg:#302B12; --warn:#F09A7C; --warn-bg:#3A1C13;
   --chip-s:32%; --chip-l:21%; --chip-ts:70%; --chip-tl:80%; --chip-on-s:55%; --chip-on-l:60%;
-  --bar:#B98AE6; --bar-bg:#2D2939; --term-bg:#2C2A33; --term-ink:#C7C3D1;
+  --bar:#B98AE6; --bar-bg:#2D2939; --amber:#F4876A; --amber-bg:#40201A; --term-bg:#2C2A33; --term-ink:#C7C3D1;
 }
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.45;padding-inline:16px;padding-block:0 32px}
@@ -137,13 +137,24 @@ main{min-width:0;display:flex;flex-direction:column;gap:12px}
 .pill{display:inline-flex;flex-direction:column;align-items:center;min-width:52px;border-radius:7px;padding:3px 7px;font-variant-numeric:tabular-nums;line-height:1.15}
 .pill b{font-size:14px}
 .pill small{font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;opacity:.85}
+.pill{border:1px solid transparent}
 .pill.good{background:var(--good-bg);color:var(--good)}
-.pill.mid{background:var(--mid-bg);color:var(--mid)}
-.pill.warn{background:var(--warn-bg);color:var(--warn)}
+.pill.mid{background:var(--surface-2);color:var(--ink);border-color:var(--line)}
+.pill.mid small{color:var(--muted);opacity:1}
+.pill.low{background:var(--amber-bg);color:var(--amber)}
 .pill.none{background:var(--surface-2);color:var(--faint);border:1px dashed var(--line-strong)}
-.load{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted)}
-.load i{display:inline-block;width:6px;height:12px;border-radius:2px;background:var(--bar-bg)}
-.load i.f{background:var(--muted)}
+.load{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;color:var(--muted)}
+.load .ll{color:var(--faint);font-size:9.5px;text-transform:uppercase;letter-spacing:.07em}
+.load .dots{display:inline-flex;gap:2px}
+.load .dots i{display:inline-block;width:11px;height:6px;border-radius:3px;background:var(--bar-bg)}
+.load .dots i.f{background:var(--faint)}
+.load .lv{color:var(--muted);font-weight:500;min-width:44px}
+.tstat{display:inline-flex;align-items:baseline;gap:6px;color:var(--muted);font-size:12.5px;font-variant-numeric:tabular-nums}
+.tstat b{color:var(--ink);font-weight:600}
+.tstat .si{color:var(--star)}
+.ffoot{position:sticky;bottom:-14px;margin:6px -14px -14px;background:var(--surface);z-index:2}
+.ffoot .si{color:var(--star)}
+.ffoot b{font-size:18px;color:var(--ink)}
 .chevron{color:var(--faint);transition:transform .15s}
 .course.open .chevron{transform:rotate(180deg)}
 
@@ -166,9 +177,12 @@ main{min-width:0;display:flex;flex-direction:column;gap:12px}
 .scores{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:5px 24px}
 .score{display:grid;grid-template-columns:minmax(0,1fr) 72px 36px;align-items:center;gap:8px;font-size:12px}
 .score .l{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.score .tr{height:6px;border-radius:3px;background:var(--bar-bg);overflow:hidden}
+.score .tr{position:relative;height:6px;border-radius:3px;background:var(--bar-bg)}
 .score .tr i{display:block;height:100%;background:var(--bar);border-radius:3px}
+.score .tr b{position:absolute;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:var(--surface-2);box-shadow:0 0 0 2px var(--ink)}
 .score .v{font-family:var(--mono);text-align:right;font-size:12px}
+.medkey{margin-left:10px;text-transform:none;letter-spacing:0;font-weight:400;color:var(--faint);display:inline-flex;align-items:center;gap:6px}
+.medkey b{width:8px;height:8px;border-radius:50%;background:var(--surface-2);box-shadow:0 0 0 2px var(--ink)}
 .score.hl .l{color:var(--ink);font-weight:600}
 .noeval{font-size:12.5px;color:var(--faint);font-style:italic}
 .empty{padding:40px 16px;text-align:center;color:var(--muted);border:1px dashed var(--line-strong);border-radius:10px}
@@ -247,8 +261,11 @@ main{min-width:0;display:flex;flex-direction:column;gap:12px}
 .ev.short .et{-webkit-line-clamp:1}
 .ev.int{background-image:repeating-linear-gradient(135deg,transparent 0 6px,color-mix(in srgb,var(--c) 14%,transparent) 6px 8px)}
 .ev.x{--c:var(--t-x);--cb:var(--t-x-bg);color:var(--t-x-ink)}
+.ev>span{flex-shrink:0}
 .ev .et{font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .ev .em{font-family:var(--mono);font-size:10.5px;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev .ei{font-family:var(--sans);font-style:italic}
+.sitem .mi{font-family:var(--sans);font-size:11.5px;margin-top:1px}
 .ev .ed{font-family:var(--mono);font-size:10.5px;font-weight:500;color:var(--c);white-space:nowrap}
 .ev.x .ed{color:var(--t-x)}
 .cal-empty{padding:28px 16px;text-align:center;color:var(--muted);font-size:13px}
@@ -261,6 +278,21 @@ main{min-width:0;display:flex;flex-direction:column;gap:12px}
 .clist div{border-left:3px solid var(--t-x);padding:2px 0 2px 10px}
 .clist .d{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
 .notime{font-size:12.5px;color:var(--muted)}
+.ilist{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.ilist h3{margin:0;font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px}
+.ilist h3 span{font-family:var(--mono);font-size:12px;background:var(--t-int-bg);color:var(--t-int);border-radius:6px;padding:1px 7px}
+.iitem{border-left:3px solid var(--t-int);padding:2px 0 2px 10px;display:flex;flex-direction:column;gap:4px}
+.ihead{display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline}
+.ihead b{font-size:13.5px}
+.im{font-size:12px;color:var(--muted)}
+.iitem ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 8px}
+.iitem li{display:inline-flex;gap:6px;font-family:var(--mono);font-size:11.5px;background:var(--t-int-bg);border-radius:6px;padding:2px 8px}
+.idate{font-weight:600;color:var(--ink)}
+.itime{color:var(--muted)}
+.iitem.idup{border-left-color:var(--t-x)}
+.iitem.idup .ihead b{color:var(--t-x)}
+.inote{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.inote a{color:var(--accent)}
 @media (max-width:900px){.sched{grid-template-columns:1fr}.sbar{position:static;max-height:420px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -275,10 +307,6 @@ main{min-width:0;display:flex;flex-direction:column;gap:12px}
       <button class="tab" role="tab" id="tabbtn-courses" data-tab="courses" aria-selected="true">Courses</button>
       <button class="tab" role="tab" id="tabbtn-schedule" data-tab="schedule" aria-selected="false">Schedule</button>
     </div>
-    <div class="stats">
-      <div class="stat star"><b id="st-n">0</b><span>starred</span></div>
-      <div class="stat"><b id="st-u">0</b><span>starred credits</span></div>
-    </div>
     <button class="filters-toggle" id="ftoggle" aria-expanded="false">Filters</button>
   </header>
 
@@ -291,6 +319,7 @@ main{min-width:0;display:flex;flex-direction:column;gap:12px}
       </div>
       <label class="switch" style="padding:10px 2px 4px"><input type="checkbox" id="starOnly"> Starred only</label>
       <div id="groups"></div>
+      <div class="sfoot ffoot"><span><span class="si">★</span> <b id="st-n">0</b> starred</span><span><b id="st-u">0</b> credits</span></div>
     </aside>
 
     <main>
@@ -323,7 +352,7 @@ main{min-width:0;display:flex;flex-direction:column;gap:12px}
         </div>
         <div class="sbar-actions"><button class="linkbtn" id="sSelStar">Select all starred</button><button class="linkbtn" id="sClear">Clear selection</button></div>
         <div class="slist" id="slist"></div>
-        <div class="sfoot"><span id="sCount">0 selected</span><span><b id="sCred">0</b> credits</span></div>
+        <div class="sfoot"><span><b id="sCount">0</b> selected</span><span><b id="sCred">0</b> credits</span></div>
       </aside>
       <div class="cal-wrap">
         <div class="cal-top">
@@ -332,12 +361,13 @@ main{min-width:0;display:flex;flex-direction:column;gap:12px}
             <span class="tp-full"><i></i>Full semester</span>
             <span class="tp-h1"><i></i>1st half</span>
             <span class="tp-h2"><i></i>2nd half</span>
-            <span class="tp-int"><i></i>Intensive / travel</span>
+            <span class="tp-int"><i></i>Intensive / travel (listed below)</span>
             <span><i class="xx"></i>Conflict</span>
           </div>
         </div>
         <div class="cal-scroll"><div class="cal" id="cal"></div></div>
         <div class="notime" id="notime" hidden></div>
+        <div class="ilist" id="ilist" hidden></div>
         <div class="cbar" id="cbar"></div>
       </div>
     </div>
@@ -408,6 +438,13 @@ COURSES.forEach(c => {
   c.search = [c.course_code, c.course_code.replace('.',' '), c.title, c.instructorNames.join(' '), c.sections.flatMap(s=>s.instructors.map(i=>i.full_name||'')).join(' ')].join(' ').toLowerCase();
 });
 allHours.sort((a,b)=>a-b);
+const MEDIAN = (() => {
+  const seen = new Map();
+  COURSES.forEach(c => c.sections.forEach(s => s.instructors.forEach(i => { if (i.evaluation_2023_2026) seen.set(c.course_code+'|'+i.name, i.evaluation_2023_2026.scores||{}); })));
+  const out = {};
+  [...SCORE_KEYS, HOURS_KEY].forEach(k => { const v=[...seen.values()].map(s=>s[k]).filter(x=>x!=null).sort((a,b)=>a-b); if (v.length) out[k] = v.length%2 ? v[(v.length-1)/2] : (v[v.length/2-1]+v[v.length/2])/2; });
+  return out;
+})();
 const q1 = allHours[Math.floor(allHours.length/3)], q2 = allHours[Math.floor(allHours.length*2/3)];
 COURSES.forEach(c => { c.load = c.hours==null ? null : c.hours < q1 ? "Low" : c.hours < q2 ? "Medium" : "High"; });
 
@@ -548,9 +585,12 @@ const sorters = {
 /* ---------- render ---------- */
 const STAR = `<svg viewBox="0 0 24 24"><path d="M12 2.8l2.83 5.73 6.33.92-4.58 4.46 1.08 6.3L12 17.24l-5.66 2.97 1.08-6.3L2.84 9.45l6.33-.92z" fill="currentColor"/></svg>`;
 const STAR_O = `<svg viewBox="0 0 24 24"><path d="M12 2.8l2.83 5.73 6.33.92-4.58 4.46 1.08 6.3L12 17.24l-5.66 2.97 1.08-6.3L2.84 9.45l6.33-.92z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>`;
-const tier = v => v==null ? 'none' : v>=4.5 ? 'good' : v>=4.0 ? 'mid' : 'warn';
-const pill = (v,label) => `<span class="pill ${tier(v)}" title="${label} (1–5)"><b>${v==null?'–':v.toFixed(2)}</b><small>${v==null?'no eval':label}</small></span>`;
-const loadBars = l => { const n = {Low:1,Medium:2,High:3}[l]||0; return l ? `<span class="load" title="Workload: ${l}">${[1,2,3].map(i=>`<i class="${i<=n?'f':''}"></i>`).join('')} ${l} load</span>` : ''; };
+const RANKS = { course: COURSES.map(c=>c.rating).filter(v=>v!=null).sort((a,b)=>a-b), instructor: COURSES.map(c=>c.instrRating).filter(v=>v!=null).sort((a,b)=>a-b) };
+const pctOf = (v, arr) => { let lo=0,hi=arr.length; while(lo<hi){ const m=(lo+hi)>>1; if(arr[m]<v) lo=m+1; else hi=m; } return lo/arr.length; };
+const tier = (v,label) => { if (v==null) return 'none'; const p = pctOf(v, RANKS[label]); return p>=0.8 ? 'good' : p<0.2 ? 'low' : 'mid'; };
+const tierTip = {good:'top 20% of courses', low:'bottom 20% of courses', mid:'middle 60% of courses', none:''};
+const pill = (v,label) => `<span class="pill ${tier(v,label)}" title="${label} overall (1–5)${v==null?'':' · '+tierTip[tier(v,label)]}"><b>${v==null?'–':v.toFixed(2)}</b><small>${v==null?'no eval':label}</small></span>`;
+const loadBars = l => { const n = {Low:1,Medium:2,High:3}[l]||0; return l ? `<span class="load" title="Workload: ${l} (thirds of the survey's hours-outside-class score)"><span class="ll">Workload</span><span class="dots">${[1,2,3].map(i=>`<i class="${i<=n?'f':''}"></i>`).join('')}</span><span class="lv">${l}</span></span>` : ''; };
 
 function head(c){
   const s0 = c.sections[0];
@@ -580,8 +620,8 @@ function evalBlock(i){
   const e = i.evaluation_2023_2026;
   if (!e) return `<div class="instr"><div class="instr-h"><b>${esc(i.full_name || i.name)}</b></div><div class="noeval">No 2023–2026 evaluation found for this instructor and course.</div></div>`;
   const sc = e.scores || {};
-  const rows = SCORE_KEYS.filter(k=>sc[k]!=null).map((k,idx)=>`<div class="score ${idx<2?'hl':''}"><span class="l" title="${k}">${k}</span><span class="tr"><i style="width:${Math.max(0,Math.min(100,(sc[k]-1)/4*100))}%"></i></span><span class="v">${sc[k].toFixed(2)}</span></div>`).join('');
-  const hrs = sc[HOURS_KEY]!=null ? `<div class="score"><span class="l" title="Coded survey scale, not literal hours">Hours/week outside class*</span><span class="tr"><i style="width:${Math.min(100,sc[HOURS_KEY]/2.4*100)}%;background:var(--muted)"></i></span><span class="v">${sc[HOURS_KEY].toFixed(2)}</span></div>` : '';
+  const rows = SCORE_KEYS.filter(k=>sc[k]!=null).map((k,idx)=>`<div class="score ${idx<2?'hl':''}"><span class="l" title="${k}">${k}</span><span class="tr"><i style="width:${Math.max(0,Math.min(100,(sc[k]-3)/2*100))}%"></i>${MEDIAN[k]!=null?`<b style="left:${Math.max(0,(MEDIAN[k]-3)/2*100)}%" title="Median across all courses: ${MEDIAN[k].toFixed(2)}"></b>`:''}</span><span class="v">${sc[k].toFixed(2)}</span></div>`).join('');
+  const hrs = sc[HOURS_KEY]!=null ? `<div class="score"><span class="l" title="Coded survey scale, not literal hours">Hours/week outside class*</span><span class="tr"><i style="width:${Math.min(100,sc[HOURS_KEY]/2.4*100)}%;background:var(--muted)"></i>${MEDIAN[HOURS_KEY]!=null?`<b style="left:${Math.min(100,MEDIAN[HOURS_KEY]/2.4*100)}%" title="Median across all courses: ${MEDIAN[HOURS_KEY].toFixed(2)}"></b>`:''}</span><span class="v">${sc[HOURS_KEY].toFixed(2)}</span></div>` : '';
   return `<div class="instr">
     <div class="instr-h"><b>${esc(i.full_name || i.name)}</b><span class="m">${e.respondents}/${e.enrolled} responded (${Math.round(e.response_rate*100)}%) · ${e.sections_evaluated} section${e.sections_evaluated>1?'s':''} · ${esc(e.terms)}</span></div>
     <div class="scores">${rows}${hrs}</div>
@@ -597,7 +637,7 @@ function body(c){
   return `<div class="body">
     <div><h3 class="sec-h">Description</h3><p class="desc">${linkify(c.description)||'<span class="noeval">No description.</span>'}</p></div>
     <div class="kv"><div><span>Department</span> ${esc(c.department)}</div></div>
-    <div><h3 class="sec-h">Sections and evaluations</h3><div class="sections">${secs}</div></div>
+    <div><h3 class="sec-h">Sections and evaluations <span class="medkey"><b></b> median across all courses · bars span 3–5</span></h3><div class="sections">${secs}</div></div>
   </div>`;
 }
 function card(c){
@@ -690,7 +730,7 @@ document.getElementById('sub').textContent = `${META.term} · ${META.program} ·
 const TERM_CLS = {"Full semester":"tp-full","1st half":"tp-h1","2nd half":"tp-h2","Intensive / travel":"tp-int"};
 const WD = {Su:0,M:1,T:2,W:3,R:4,F:5,Sa:6};
 const COLS = ["M","T","W","R","F","Sa","Su"];
-const HH = 48; // px per hour
+const HH = 60; // px per hour
 const SECTIONS = [];
 COURSES.forEach(c => c.sections.forEach(s => SECTIONS.push({c, s, key:String(s.class_nbr), multi:c.sections.length>1})));
 const selected = new Set(store.get('stern27.sched', []).filter(k => SECTIONS.some(x=>x.key===k)));
@@ -698,9 +738,16 @@ let sq = "", showConf = false;
 const md = s => s.replace(/^0/,'').replace('/0','/');
 function parseEnd(s){ const m = s.match(/-\s*(\d{1,2}):(\d{2})\s*(am|pm)/i); if(!m) return null; let h=+m[1]%12; if(m[3].toLowerCase()==='pm') h+=12; return h*60+ +m[2]; }
 const fmtMin = m => { const h=Math.floor(m/60), mm=m%60, ap=h>=12?'pm':'am', h12=((h+11)%12)+1; return `${h12}${mm?':'+String(mm).padStart(2,'0'):''}${ap}`; };
+const instrOf = s => s.instructors.map(i=>i.full_name||i.name).join(', ');
+function dupInfo(){
+  const by = new Map();
+  SECTIONS.filter(x=>selected.has(x.key)).forEach(x => { if(!by.has(x.c.course_code)) by.set(x.c.course_code, []); by.get(x.c.course_code).push(x); });
+  const groups = [...by.values()].filter(g=>g.length>1);
+  return { groups, keys: new Set(groups.flat().map(x=>x.key)) };
+}
 function events(){
   const ev = [];
-  SECTIONS.filter(x=>selected.has(x.key)).forEach(x => x.s.meetings.forEach((m,mi) => {
+  SECTIONS.filter(x=>selected.has(x.key) && x.s.term!=='Intensive / travel').forEach(x => x.s.meetings.forEach((m,mi) => {
     if (!m.days_time) return;
     const st = parseStart(m.days_time), en = parseEnd(m.days_time); if (st==null||en==null) return;
     const [a,b] = m.dates.split('-').map(d2);
@@ -713,7 +760,7 @@ function events(){
   }));
   for (let i=0;i<ev.length;i++) for (let j=i+1;j<ev.length;j++){
     const A=ev[i], B=ev[j];
-    if (A.x.key===B.x.key || A.day!==B.day || !(A.st<B.en && B.st<A.en)) continue;
+    if (A.x.c===B.x.c || A.day!==B.day || !(A.st<B.en && B.st<A.en)) continue;
     let shared = null; for (const d of A.dates) if (B.dates.has(d)){ shared=d; break; }
     if (shared){ A.conf.add(B); B.conf.add(A); }
   }
@@ -726,10 +773,10 @@ function renderSchedList(){
     return `<label class="sitem ${TERM_CLS[s.term]} ${conflicted?'x':''}" title="${esc(s.term)}">
       <input type="checkbox" data-sk="${x.key}" ${selected.has(x.key)?'checked':''}>
       <span class="dot"></span>
-      <span><div class="t">${esc(x.c.title)}</div><div class="m">${x.c.course_code}${x.multi?' · Sec '+esc(s.section):''} · ${esc(when)}</div></span>
+      <span><div class="t">${esc(x.c.title)}</div><div class="m">${x.c.course_code}${x.multi?' · Sec '+esc(s.section):''}</div><div class="m">${esc(when)}</div><div class="m mi">${esc(instrOf(s))}</div></span>
       <span class="cr">${(+x.c.units).toFixed(1)} cr</span></label>`;
   };
-  const conflictedKeys = new Set(); events().forEach(e => { if (e.conf.size) conflictedKeys.add(e.x.key); });
+  const conflictedKeys = new Set(dupInfo().keys); events().forEach(e => { if (e.conf.size) conflictedKeys.add(e.x.key); });
   const st = SECTIONS.filter(x => stars.has(x.c.course_code) && match(x));
   const rest = SECTIONS.filter(x => !stars.has(x.c.course_code) && match(x)).sort((p,q)=>p.c.title.localeCompare(q.c.title));
   document.getElementById('slist').innerHTML =
@@ -740,6 +787,7 @@ function renderSchedList(){
 }
 function renderCalendar(){
   const ev = events();
+  const DUP = dupInfo();
   const sel = SECTIONS.filter(x=>selected.has(x.key));
   let lo = 9*60, hi = 21*60;
   ev.forEach(e => { lo=Math.min(lo, Math.floor(e.st/60)*60); hi=Math.max(hi, Math.ceil(e.en/60)*60); });
@@ -757,18 +805,28 @@ function renderCalendar(){
     const blocks = de.map(e => {
       const s=e.x.s, c=e.x.c, w=100/e.lanes, [a,b]=e.range.split('-');
       const dates = a===b ? md(a) : `${md(a)}–${md(b)}`;
-      const tip = `${c.course_code} ${c.title}\n${fmtMin(e.st)}–${fmtMin(e.en)} · ${e.range}` + (e.conf.size ? `\nConflicts with: ${[...new Set([...e.conf].map(o=>o.x.c.course_code))].join(', ')}` : '');
-      return `<div class="ev ${e.en-e.st<100?'short':''} ${TERM_CLS[s.term]} ${s.term==='Intensive / travel'?'int':''} ${e.conf.size?'x':''}" style="top:${px(e.st)+1}px;height:${px(e.en)-px(e.st)-2}px;left:calc(${e.lane*w}% + 2px);width:calc(${w}% - 4px)" title="${esc(tip)}">
+      const tip = `${c.course_code} ${c.title}\n${instrOf(s)}\n${fmtMin(e.st)}–${fmtMin(e.en)} · ${e.range}` + (DUP.keys.has(e.x.key) ? `\nAnother section of this course is also selected` : '') + (e.conf.size ? `\nConflicts with: ${[...new Set([...e.conf].map(o=>o.x.c.course_code))].join(', ')}` : '');
+      return `<div class="ev ${e.en-e.st<100?'short':''} ${TERM_CLS[s.term]} ${s.term==='Intensive / travel'?'int':''} ${e.conf.size||DUP.keys.has(e.x.key)?'x':''}" style="top:${px(e.st)+1}px;height:${px(e.en)-px(e.st)-2}px;left:calc(${e.lane*w}% + 2px);width:calc(${w}% - 4px)" title="${esc(tip)}">
         <span class="et">${esc(c.title)}</span>
         <span class="em">${c.course_code}${e.x.multi?' · '+esc(s.section):''}</span>
         <span class="em">${fmtMin(e.st)}–${fmtMin(e.en)}</span>
+        <span class="em ei">${esc(instrOf(s))}</span>
         <span class="ed">${dates}</span></div>`;
     }).join('');
     html += `<div class="dcol ${d==='Sa'||d==='Su'?'we':''}" style="height:${H}px;--hh:${HH}px">${blocks}</div>`;
   });
   document.getElementById('cal').innerHTML = html;
 
-  const nt = sel.filter(x => x.s.meetings.some(m=>!m.days_time));
+  const ints = sel.filter(x => x.s.term==='Intensive / travel')
+    .sort((p,q)=>d2(p.s.meetings[0].dates.split('-')[0]) - d2(q.s.meetings[0].dates.split('-')[0]));
+  const ilEl = document.getElementById('ilist');
+  ilEl.hidden = !ints.length;
+  ilEl.innerHTML = ints.length ? `<h3>Intensive / travel courses <span>${ints.length}</span></h3>` + ints.map(x => {
+    const mt = x.s.meetings.map(m => { const [a,b]=m.dates.split('-'); const dd = a===b ? md(a) : `${md(a)}–${md(b)}`;
+      return `<li><span class="idate">${dd}</span><span class="itime">${m.days_time ? esc(fmtTime(m.days_time)) : 'Time TBA'}</span></li>`; }).join('');
+    return `<div class="iitem ${DUP.keys.has(x.key)?'idup':''}"><div class="ihead"><b>${esc(x.c.title)}</b><span class="im">${x.c.course_code}${x.multi?' · Sec '+esc(x.s.section):''} · ${(+x.c.units).toFixed(1)} cr · ${esc(instrOf(x.s))}</span></div><ul>${mt}</ul>${x.s.notes?`<div class="inote">${linkify(x.s.notes)}</div>`:''}</div>`;
+  }).join('') : '';
+  const nt = sel.filter(x => x.s.term!=='Intensive / travel' && x.s.meetings.some(m=>!m.days_time));
   const ntEl = document.getElementById('notime');
   ntEl.hidden = !nt.length;
   ntEl.innerHTML = nt.length ? 'No meeting time listed: ' + nt.map(x=>`<b>${x.c.course_code}</b> ${esc(x.c.title)} (${x.s.meetings.map(m=>m.dates).join(', ')})`).join(' · ') : '';
@@ -780,13 +838,13 @@ function renderCalendar(){
     const shared=[...e.dates].filter(d=>o.dates.has(d));
     pairs.get(k).slots.add(`${DAY_NAME[e.day]} ${fmtMin(Math.max(e.st,o.st))}–${fmtMin(Math.min(e.en,o.en))} · ${shared.length} date${shared.length>1?'s':''}`);
   }));
-  const n = pairs.size;
+  const n = pairs.size + DUP.groups.length;
   document.getElementById('cbar').innerHTML = `<h3>Schedule conflicts</h3><span class="cbadge ${n?'bad':''}">${n} conflict${n===1?'':'s'}</span>
     ${n?`<button class="tg" id="cToggle">${showConf?'Hide':'Show'} conflicts</button>`:''}
-    ${n&&showConf?`<div class="clist">${[...pairs.values()].map(p=>`<div><b>${p.a.c.course_code}</b> ${esc(p.a.c.title)} ↔ <b>${p.b.c.course_code}</b> ${esc(p.b.c.title)}<div class="d">${[...p.slots].join('; ')}</div></div>`).join('')}</div>`:''}`;
+    ${n&&showConf?`<div class="clist">${DUP.groups.map(g=>`<div><b>${g[0].c.course_code}</b> ${esc(g[0].c.title)}: ${g.length} sections selected<div class="d">${g.map(x=>'Sec '+esc(x.s.section)).join(', ')} · pick one</div></div>`).join('')}${[...pairs.values()].map(p=>`<div><b>${p.a.c.course_code}</b> ${esc(p.a.c.title)} ↔ <b>${p.b.c.course_code}</b> ${esc(p.b.c.title)}<div class="d">${[...p.slots].join('; ')}</div></div>`).join('')}</div>`:''}`;
 
   const codes = new Set(sel.map(x=>x.c.course_code));
-  document.getElementById('sCount').textContent = `${sel.length} selected`;
+  document.getElementById('sCount').textContent = sel.length;
   const cr = COURSES.filter(c=>codes.has(c.course_code)).reduce((a,c)=>a+ +c.units,0);
   document.getElementById('sCred').textContent = cr % 1 ? cr.toFixed(1) : cr;
 }
