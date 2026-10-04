@@ -263,6 +263,24 @@ main{min-width:0;display:flex;flex-direction:column;gap:12px}
 .sfoot b{font-size:18px}
 .sfoot span{color:var(--muted);font-size:12px}
 .cal-wrap{display:flex;flex-direction:column;gap:12px;min-width:0}
+.plans{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;align-items:stretch}
+.ptab{display:inline-flex;align-items:center;gap:7px;flex:none;border:1px solid var(--line);background:var(--surface-2);border-radius:9px;padding:6px 10px;font-size:13px;color:var(--muted);cursor:pointer;white-space:nowrap}
+.ptab:hover{border-color:var(--line-strong)}
+.ptab.on{background:var(--surface);border-color:var(--accent);color:var(--ink);box-shadow:inset 0 -2px 0 var(--accent)}
+.ptab .pn{font-weight:600}
+.ptab .pc{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.ptab .pdot{width:7px;height:7px;border-radius:50%;background:var(--t-x)}
+.ptab .px,.ptab .pedit{border:0;background:transparent;cursor:pointer;color:var(--faint);padding:0 2px;line-height:1;display:inline-grid;place-items:center;border-radius:4px}
+.ptab .px{font-size:16px}
+.ptab .px:hover,.ptab .pedit:hover{color:var(--ink);background:var(--line)}
+.ptab.padd{font-size:17px;font-weight:500;padding:4px 12px;color:var(--accent)}
+.ptab.confirm{cursor:default;gap:10px;color:var(--ink)}
+.ptab.editing{padding:3px 6px;cursor:text}
+.pname-in{border:1px solid var(--line-strong);border-radius:6px;padding:3px 7px;width:150px;font-weight:600;background:var(--surface)}
+.plan-tools{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:12px;margin-top:-4px}
+.pcode{border:1px solid var(--line-strong);border-radius:6px;padding:3px 7px;font-family:var(--mono);font-size:11.5px;width:min(320px,100%);background:var(--surface)}
+.pimp{display:inline-flex;gap:6px;align-items:center;flex-wrap:wrap}
+.pmsg{color:var(--muted)}
 .cal-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
 .cal-top h2{margin:0;font-size:16px;font-weight:600;margin-right:auto}
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted)}
@@ -378,6 +396,8 @@ main{min-width:0;display:flex;flex-direction:column;gap:12px}
         <div class="sfoot"><span><b id="sCount">0</b> selected</span><span><b id="sCred">0</b> credits</span></div>
       </aside>
       <div class="cal-wrap">
+        <div class="plans" id="plans" role="tablist" aria-label="Saved schedule plans"></div>
+        <div class="plan-tools" id="planTools"></div>
         <div class="cal-top">
           <h2>Weekly schedule · Spring 2027</h2>
           <div class="legend">
@@ -817,21 +837,34 @@ const COLS = ["M","T","W","R","F","Sa","Su"];
 const HH = 60; // px per hour
 const SECTIONS = [];
 COURSES.forEach(c => c.sections.forEach(s => SECTIONS.push({c, s, key:String(s.class_nbr), multi:c.sections.length>1})));
-const selected = new Set(store.get('stern27.sched', []).filter(k => SECTIONS.some(x=>x.key===k)));
+const validKey = k => SECTIONS.some(x=>x.key===k);
+const PLANS = (() => {
+  const saved = store.get('stern27.plans', null);
+  if (saved && Array.isArray(saved.plans) && saved.plans.length) {
+    saved.plans.forEach(p => { p.keys = (p.keys||[]).filter(validKey); });
+    if (!saved.plans.some(p=>p.id===saved.active)) saved.active = saved.plans[0].id;
+    return saved;
+  }
+  const id = 'p' + Date.now().toString(36);
+  return { plans: [{ id, name: 'Plan 1', keys: store.get('stern27.sched', []).filter(validKey) }], active: id };
+})();
+const activePlan = () => PLANS.plans.find(p=>p.id===PLANS.active);
+const selected = new Set(activePlan().keys);
+let renamingId = null, deletingId = null, importOpen = false, codeShown = '';
 let sq = "", showConf = false;
 const md = s => s.replace(/^0/,'').replace('/0','/');
 function parseEnd(s){ const m = s.match(/-\s*(\d{1,2}):(\d{2})\s*(am|pm)/i); if(!m) return null; let h=+m[1]%12; if(m[3].toLowerCase()==='pm') h+=12; return h*60+ +m[2]; }
 const fmtMin = m => { const h=Math.floor(m/60), mm=m%60, ap=h>=12?'pm':'am', h12=((h+11)%12)+1; return `${h12}${mm?':'+String(mm).padStart(2,'0'):''}${ap}`; };
 const instrOf = s => s.instructors.map(i=>i.full_name||i.name).join(', ');
-function dupInfo(){
+function dupInfo(keys=selected){
   const by = new Map();
-  SECTIONS.filter(x=>selected.has(x.key)).forEach(x => { if(!by.has(x.c.course_code)) by.set(x.c.course_code, []); by.get(x.c.course_code).push(x); });
+  SECTIONS.filter(x=>keys.has(x.key)).forEach(x => { if(!by.has(x.c.course_code)) by.set(x.c.course_code, []); by.get(x.c.course_code).push(x); });
   const groups = [...by.values()].filter(g=>g.length>1);
   return { groups, keys: new Set(groups.flat().map(x=>x.key)) };
 }
-function events(){
+function events(keys=selected){
   const ev = [];
-  SECTIONS.filter(x=>selected.has(x.key) && x.s.term!=='Intensive / travel').forEach(x => x.s.meetings.forEach((m,mi) => {
+  SECTIONS.filter(x=>keys.has(x.key) && x.s.term!=='Intensive / travel').forEach(x => x.s.meetings.forEach((m,mi) => {
     if (!m.days_time) return;
     const st = parseStart(m.days_time), en = parseEnd(m.days_time); if (st==null||en==null) return;
     const [a,b] = m.dates.split('-').map(d2);
@@ -932,8 +965,88 @@ function renderCalendar(){
   const cr = COURSES.filter(c=>codes.has(c.course_code)).reduce((a,c)=>a+ +c.units,0);
   document.getElementById('sCred').textContent = cr % 1 ? cr.toFixed(1) : cr;
 }
-function renderSchedule(){ renderSchedList(); renderCalendar(); }
-function saveSel(){ store.set('stern27.sched',[...selected]); }
+function planStats(p){
+  const keys = new Set(p.keys);
+  const codes = new Set(SECTIONS.filter(x=>keys.has(x.key)).map(x=>x.c.course_code));
+  const cr = COURSES.filter(c=>codes.has(c.course_code)).reduce((a,c)=>a+ +c.units,0);
+  const bad = dupInfo(keys).groups.length>0 || events(keys).some(e=>e.conf.size);
+  return { cr: cr % 1 ? cr.toFixed(1) : String(cr), bad };
+}
+function renderPlans(){
+  const el = document.getElementById('plans');
+  el.innerHTML = PLANS.plans.map(p => {
+    const on = p.id===PLANS.active, st = planStats(p);
+    if (renamingId===p.id) return `<span class="ptab on editing"><input class="pname-in" id="pnameIn" value="${esc(p.name)}" maxlength="30" aria-label="Plan name"></span>`;
+    if (deletingId===p.id) return `<span class="ptab ${on?'on':''} confirm">Delete “${esc(p.name)}”? <button class="linkbtn" data-pdel-yes="${p.id}">Yes</button><button class="linkbtn" data-pdel-no>No</button></span>`;
+    return `<span class="ptab ${on?'on':''}" data-plan="${p.id}" role="tab" tabindex="0" aria-selected="${on}" title="${on?'Double-click to rename':'Switch to this plan'}">
+      <span class="pn">${esc(p.name)}</span><span class="pc">${st.cr} cr</span>${st.bad?'<span class="pdot" title="Has conflicts"></span>':''}
+      ${on?`<button class="pedit" data-pren="${p.id}" aria-label="Rename plan" title="Rename"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>`:''}
+      ${PLANS.plans.length>1?`<button class="px" data-pdel="${p.id}" aria-label="Delete plan ${esc(p.name)}" title="Delete">×</button>`:''}</span>`;
+  }).join('') + `<button class="ptab padd" id="planAdd" aria-label="New plan" title="New plan">+</button>`;
+  const inp = document.getElementById('pnameIn'); if (inp) { inp.focus(); inp.select(); }
+  document.getElementById('planTools').innerHTML = `<button class="linkbtn" id="planCopy">Copy plan code</button><button class="linkbtn" id="planImport">${importOpen?'Cancel import':'Import plan code'}</button>`
+    + (codeShown ? `<input class="pcode" id="pcodeOut" readonly value="${esc(codeShown)}" aria-label="Plan code">` : '')
+    + (importOpen ? `<span class="pimp"><input class="pcode" id="pcodeIn" placeholder="Paste a plan code" aria-label="Paste a plan code"><button class="tg on" id="pcodeAdd">Add plan</button></span>` : '')
+    + `<span class="pmsg" id="pmsg"></span>`;
+}
+function renderSchedule(){ renderSchedList(); renderCalendar(); renderPlans(); }
+function savePlans(){ store.set('stern27.plans', PLANS); }
+function saveSel(){ activePlan().keys = [...selected]; savePlans(); }
+function switchPlan(id){
+  PLANS.active = id; selected.clear(); activePlan().keys.forEach(k=>selected.add(k)); showConf = false; savePlans();
+}
+function nextPlanName(){ let n = PLANS.plans.length + 1; while (PLANS.plans.some(p=>p.name==='Plan '+n)) n++; return 'Plan ' + n; }
+function commitRename(save){
+  if (!renamingId) return;
+  const inp = document.getElementById('pnameIn'), p = PLANS.plans.find(x=>x.id===renamingId);
+  if (save && inp && p) { const v = inp.value.trim(); if (v) p.name = v; }
+  renamingId = null; savePlans(); renderPlans();
+}
+const planCode = p => 'S27.' + btoa(unescape(encodeURIComponent(JSON.stringify({n:p.name,k:p.keys})))).replace(/=+$/,'');
+function readPlanCode(code){
+  try { const o = JSON.parse(decodeURIComponent(escape(atob(code.trim().replace(/^S27\./,''))))); if (!Array.isArray(o.k)) return null;
+    return { name: String(o.n||'Imported plan').slice(0,30), keys: o.k.map(String).filter(validKey) }; } catch(e){ return null; }
+}
+const plansEl = document.getElementById('plans'), toolsEl = document.getElementById('planTools');
+plansEl.addEventListener('click', e => {
+  if (e.target.closest('#planAdd')) {
+    commitRename(true);
+    const p = { id: 'p' + Date.now().toString(36), name: nextPlanName(), keys: [] };
+    PLANS.plans.push(p); switchPlan(p.id); renamingId = p.id; deletingId = null; return renderSchedule();
+  }
+  const yes = e.target.closest('[data-pdel-yes]');
+  if (yes) { const id = yes.dataset.pdelYes, i = PLANS.plans.findIndex(p=>p.id===id); PLANS.plans.splice(i,1); deletingId = null;
+    if (PLANS.active===id) switchPlan(PLANS.plans[Math.max(0,i-1)].id); else savePlans(); return renderSchedule(); }
+  if (e.target.closest('[data-pdel-no]')) { deletingId = null; return renderPlans(); }
+  const del = e.target.closest('[data-pdel]'); if (del) { deletingId = del.dataset.pdel; renamingId = null; return renderPlans(); }
+  const ren = e.target.closest('[data-pren]'); if (ren) { renamingId = ren.dataset.pren; deletingId = null; return renderPlans(); }
+  const tab = e.target.closest('[data-plan]');
+  if (tab && tab.dataset.plan!==PLANS.active) { commitRename(true); deletingId = null; switchPlan(tab.dataset.plan); renderSchedule(); }
+});
+plansEl.addEventListener('dblclick', e => { const tab = e.target.closest('[data-plan]'); if (tab && !e.target.closest('button')) { renamingId = tab.dataset.plan; renderPlans(); } });
+plansEl.addEventListener('keydown', e => {
+  if (e.target.id==='pnameIn') { if (e.key==='Enter') { e.preventDefault(); commitRename(true); } else if (e.key==='Escape') commitRename(false); return; }
+  if ((e.key==='Enter'||e.key===' ') && e.target.dataset.plan) { e.preventDefault(); e.target.click(); }
+});
+plansEl.addEventListener('focusout', e => { if (e.target.id==='pnameIn') setTimeout(() => { if (renamingId && document.activeElement?.id!=='pnameIn') commitRename(true); }, 0); });
+toolsEl.addEventListener('click', e => {
+  if (e.target.id==='planCopy') {
+    const code = planCode(activePlan()); codeShown = code; importOpen = false; renderPlans();
+    const done = ok => { const m = document.getElementById('pmsg'); if (m) m.textContent = ok ? 'Copied' : 'Select the code and copy it'; const o = document.getElementById('pcodeOut'); if (o && !ok) { o.focus(); o.select(); } };
+    try { navigator.clipboard.writeText(code).then(()=>done(true), ()=>done(false)); } catch(err){ done(false); }
+    return;
+  }
+  if (e.target.id==='planImport') { importOpen = !importOpen; codeShown = ''; renderPlans(); document.getElementById('pcodeIn')?.focus(); return; }
+  if (e.target.id==='pcodeAdd') importFromInput();
+});
+toolsEl.addEventListener('keydown', e => { if (e.target.id==='pcodeIn' && e.key==='Enter') importFromInput(); });
+function importFromInput(){
+  const r = readPlanCode(document.getElementById('pcodeIn').value);
+  if (!r) { document.getElementById('pmsg').textContent = 'That code is not valid. Copy it again from "Copy plan code".'; return; }
+  let name = r.name, n = 2; while (PLANS.plans.some(p=>p.name===name)) name = `${r.name} (${n++})`;
+  const p = { id: 'p' + Date.now().toString(36), name, keys: r.keys };
+  PLANS.plans.push(p); importOpen = false; switchPlan(p.id); renderSchedule();
+}
 document.getElementById('slist').addEventListener('change', e => {
   const k = e.target.dataset.sk; if(!k) return;
   e.target.checked ? selected.add(k) : selected.delete(k); saveSel(); renderSchedule();
