@@ -47,6 +47,7 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background
 .brand{display:flex;flex-direction:column;gap:2px;margin-right:auto}
 .brand h1{margin:0;font-size:20px;font-weight:700;letter-spacing:-.01em;text-wrap:balance}
 .brand .sub{color:var(--muted);font-size:12.5px}
+.brand .sub a{color:var(--accent)}
 .stats{display:flex;gap:8px;flex-wrap:wrap}
 .stat{display:flex;align-items:baseline;gap:6px;padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);font-variant-numeric:tabular-nums}
 .stat b{font-size:16px}
@@ -828,7 +829,7 @@ function update(){
   renderControls(); renderActive(); renderList(); renderStats();
 }
 
-document.getElementById('sub').textContent = `${META.term} · ${META.program} · ${COURSES.length} courses · evaluations ${META.evaluation_scope.split(' ')[0]}`;
+document.getElementById('sub').innerHTML = `${esc(META.term)} · ${esc(META.program)} · ${COURSES.length} courses · evaluations ${esc(META.evaluation_scope.split(' ')[0])} · <a href="https://amirgoldstein.github.io/Focused_Spring27/tmi/">TMI courses</a> · <a href="https://amirgoldstein.github.io/Focused_Spring27/spec/">Specializations</a>`;
 
 /* ================= Schedule tab ================= */
 const TERM_CLS = {"Full semester":"tp-full","1st half":"tp-h1","2nd half":"tp-h2","Intensive / travel":"tp-int"};

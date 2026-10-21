@@ -1,0 +1,1073 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>TMI Spring 2027 Courses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#F3F3F7; --surface:#FFFFFF; --surface-2:#F8F7FB; --ink:#17151F; --muted:#5E5A6E; --faint:#8C889B;
+  --line:#E2DFEA; --line-strong:#CBC6D8; --accent:#57068C; --accent-soft:#EFE6F7; --accent-ink:#FFFFFF;
+  --star:#D99A00; --good:#1D7A4D; --good-bg:#E3F4EA; --mid:#6B5E00; --mid-bg:#F6F0CF; --warn:#A23B1C; --warn-bg:#FBE6DE;
+  --chip-s:62%; --chip-l:91%; --chip-ts:55%; --chip-tl:27%; --chip-on-s:52%; --chip-on-l:42%;
+  --bar:#57068C; --bar-bg:#ECE9F2; --amber:#B3401A; --amber-bg:#FDE1D5; --term-bg:#E9E8EC; --term-ink:#4A4757;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#121019; --surface:#1B1824; --surface-2:#211E2C; --ink:#ECE9F4; --muted:#A9A3BA; --faint:#7C768E;
+    --line:#2D2939; --line-strong:#3E394D; --accent:#B98AE6; --accent-soft:#2C2240; --accent-ink:#17121F;
+    --star:#F2B632; --good:#6FD39E; --good-bg:#16311F; --mid:#E4CF6A; --mid-bg:#302B12; --warn:#F09A7C; --warn-bg:#3A1C13;
+    --chip-s:32%; --chip-l:21%; --chip-ts:70%; --chip-tl:80%; --chip-on-s:55%; --chip-on-l:60%;
+    --bar:#B98AE6; --bar-bg:#2D2939; --amber:#F4876A; --amber-bg:#40201A; --term-bg:#2C2A33; --term-ink:#C7C3D1;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#121019; --surface:#1B1824; --surface-2:#211E2C; --ink:#ECE9F4; --muted:#A9A3BA; --faint:#7C768E;
+  --line:#2D2939; --line-strong:#3E394D; --accent:#B98AE6; --accent-soft:#2C2240; --accent-ink:#17121F;
+  --star:#F2B632; --good:#6FD39E; --good-bg:#16311F; --mid:#E4CF6A; --mid-bg:#302B12; --warn:#F09A7C; --warn-bg:#3A1C13;
+  --chip-s:32%; --chip-l:21%; --chip-ts:70%; --chip-tl:80%; --chip-on-s:55%; --chip-on-l:60%;
+  --bar:#B98AE6; --bar-bg:#2D2939; --amber:#F4876A; --amber-bg:#40201A; --term-bg:#2C2A33; --term-ink:#C7C3D1;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.45;padding-inline:16px;padding-block:0 32px}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1320px;margin:0 auto}
+
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding-block:16px 12px;border-bottom:1px solid var(--line)}
+.brand{display:flex;flex-direction:column;gap:2px;margin-right:auto}
+.brand h1{margin:0;font-size:20px;font-weight:700;letter-spacing:-.01em;text-wrap:balance}
+.brand .sub{color:var(--muted);font-size:12.5px}
+.brand .sub a{color:var(--accent)}
+.stats{display:flex;gap:8px;flex-wrap:wrap}
+.stat{display:flex;align-items:baseline;gap:6px;padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);font-variant-numeric:tabular-nums}
+.stat b{font-size:16px}
+.stat span{color:var(--muted);font-size:12px}
+.stat.star b{color:var(--star)}
+.filters-toggle{display:none;border:1px solid var(--line-strong);background:var(--surface);border-radius:8px;padding:7px 12px;cursor:pointer;font-weight:500}
+
+.layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:24px;padding-top:16px;align-items:start}
+aside.filters{position:sticky;top:calc(env(safe-area-inset-top,0px) + 84px);max-height:calc(100vh - 100px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:4px}
+.search{position:relative}
+.search input{width:100%;padding:9px 12px 9px 32px;border:1px solid var(--line-strong);border-radius:8px;background:var(--surface-2)}
+.search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--faint)}
+details.fg{border-top:1px solid var(--line);padding-block:10px 4px}
+details.fg:first-of-type{border-top:0}
+details.fg>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-bottom:8px}
+details.fg>summary::-webkit-details-marker{display:none}
+details.fg>summary .caret{transition:transform .15s}
+details.fg[open]>summary .caret{transform:rotate(90deg)}
+.fg .badge{font-size:10.5px;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:1px 7px;letter-spacing:0;text-transform:none}
+.fg-body{display:flex;flex-direction:column;gap:8px;padding-bottom:6px}
+.row-actions{display:flex;gap:10px;font-size:12px}
+.linkbtn{background:none;border:0;padding:0;color:var(--accent);cursor:pointer;font-weight:500}
+.linkbtn:hover{text-decoration:underline}
+
+.chip{--h:260;display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:2px 9px;font-size:12px;font-weight:500;white-space:nowrap;background:hsl(var(--h) var(--chip-s) var(--chip-l));color:hsl(var(--h) var(--chip-ts) var(--chip-tl));border:1px solid transparent}
+.spec-chips{display:flex;flex-wrap:wrap;gap:6px}
+button.chip{cursor:pointer;opacity:.9;white-space:normal;text-align:left;max-width:100%}
+button.chip:hover{opacity:1;border-color:hsl(var(--h) var(--chip-ts) var(--chip-tl) / .35)}
+button.chip.on{background:hsl(var(--h) var(--chip-on-s) var(--chip-on-l));color:#fff;opacity:1}
+:root[data-theme="dark"] button.chip.on{color:#120F18}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) button.chip.on{color:#120F18}}
+.chip .n{font-variant-numeric:tabular-nums;opacity:.7;font-size:11px}
+.check .chip{white-space:normal;line-height:1.3;border-radius:9px}
+.more-btn{align-self:flex-start;font-size:12px}
+#specMore[hidden]{display:none}
+.seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:7px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:3px 9px;font-size:12px;cursor:pointer}
+.seg button.on{background:var(--accent);color:var(--accent-ink)}
+
+.checks{display:flex;flex-direction:column;gap:2px}
+.check{display:flex;align-items:center;gap:8px;padding:3px 4px;border-radius:6px;cursor:pointer;font-size:13px}
+.check:hover{background:var(--surface-2)}
+.check input{accent-color:var(--accent);margin:0;width:15px;height:15px}
+.check .lbl{flex:1}
+.check .n{color:var(--faint);font-size:11.5px;font-variant-numeric:tabular-nums}
+.toggles{display:flex;flex-wrap:wrap;gap:6px}
+.tg{border:1px solid var(--line-strong);background:var(--surface);border-radius:7px;padding:4px 10px;font-size:12.5px;cursor:pointer}
+.tg.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.hint{font-size:11.5px;color:var(--faint)}
+.range{display:flex;align-items:center;gap:10px}
+.range input[type=range]{flex:1;accent-color:var(--accent)}
+.range output{font-family:var(--mono);font-size:12.5px;min-width:34px;text-align:right}
+.switch{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}
+.switch input{accent-color:var(--star);width:15px;height:15px;margin:0}
+
+main{min-width:0;display:flex;flex-direction:column;gap:12px}
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.count{font-weight:600}
+.count span{color:var(--muted);font-weight:400}
+.toolbar .sort{margin-left:auto;display:flex;align-items:center;gap:6px;color:var(--muted);font-size:12.5px}
+.toolbar select{border:1px solid var(--line-strong);background:var(--surface);border-radius:7px;padding:5px 8px}
+.active{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.active:empty{display:none}
+.af{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line-strong);background:var(--surface);border-radius:999px;padding:2px 4px 2px 10px;font-size:12px}
+.af.chip{border:0;padding:2px 4px 2px 10px}
+.af button{border:0;background:transparent;cursor:pointer;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;color:inherit;opacity:.7}
+.af button:hover{opacity:1;background:var(--line)}
+
+.list{display:flex;flex-direction:column;gap:8px}
+.course{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.course.starred{border-color:color-mix(in srgb,var(--star) 55%,var(--line))}
+.course.open{border-color:var(--line-strong)}
+.head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 12px;padding:12px 14px 12px 8px;cursor:pointer;align-items:start}
+.head:hover{background:var(--surface-2)}
+.starbtn{border:0;background:transparent;cursor:pointer;width:34px;height:34px;display:grid;place-items:center;border-radius:8px;color:var(--faint)}
+.starbtn:hover{background:var(--line)}
+.starbtn.on{color:var(--star)}
+.starbtn svg{width:20px;height:20px}
+.main-col{display:flex;flex-direction:column;gap:6px;min-width:0}
+.title-line{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.code{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+.ttl{font-size:15px;font-weight:600;line-height:1.3}
+.meta{display:flex;flex-wrap:wrap;gap:4px 14px;color:var(--muted);font-size:12.5px;font-variant-numeric:tabular-nums}
+.meta .sep{display:inline-flex;align-items:center;gap:5px}
+.term{font-size:11px;font-weight:600;letter-spacing:.03em;border-radius:5px;padding:1px 6px;background:var(--term-bg);color:var(--term-ink)}
+.right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.pills{display:flex;gap:6px}
+.pill{display:inline-flex;flex-direction:column;align-items:center;width:58px;border-radius:7px;padding:3px 7px;font-variant-numeric:tabular-nums;line-height:1.15}
+.pill b{font-size:14px}
+.pill small{font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;opacity:.85}
+.pill{border:1px solid transparent}
+.pill.good{background:var(--good-bg);color:var(--good)}
+.pill.mid{background:var(--surface-2);color:var(--ink);border-color:var(--line)}
+.pill.mid small{color:var(--muted);opacity:1}
+.pill.low{background:var(--amber-bg);color:var(--amber)}
+.pill.none{background:var(--surface-2);color:var(--faint);border:1px dashed var(--line-strong)}
+.load{display:inline-grid;grid-template-columns:auto auto;grid-template-areas:'ll ll' 'dots lv';justify-content:start;align-items:center;gap:3px 7px;font-size:11.5px;color:var(--muted);white-space:nowrap}
+.load .ll{grid-area:ll}
+.load .lv{grid-area:lv}
+.load .dots{grid-area:dots}
+.load .ll{color:var(--faint);font-size:9.5px;text-transform:uppercase;letter-spacing:.07em}
+.load .dots{display:inline-flex;gap:2px}
+.load .dots i{display:inline-block;width:11px;height:6px;border-radius:3px;background:var(--bar-bg)}
+.load .dots i.f{background:var(--faint)}
+.load .lv{color:var(--muted);font-weight:500}
+.tstat{display:inline-flex;align-items:baseline;gap:6px;color:var(--muted);font-size:12.5px;font-variant-numeric:tabular-nums}
+.tstat b{color:var(--ink);font-weight:600}
+.tstat .si{color:var(--star)}
+.core{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:5px;padding:1px 6px;margin-right:6px;background:var(--accent);color:var(--accent-ink)}
+.secstar{border:1px solid var(--line-strong);background:var(--surface);border-radius:6px;padding:1px 8px;font-size:12px;cursor:pointer;color:var(--muted)}
+.secstar.on{border-color:color-mix(in srgb,var(--star) 60%,var(--line));color:var(--star);font-weight:600}
+.modal{position:fixed;inset:0;z-index:50;background:rgb(10 8 16 / .45);display:grid;place-items:center;padding:16px}
+.modal[hidden]{display:none}
+.modal-box{width:min(460px,100%);max-height:calc(100vh - 32px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:0 20px 50px rgb(0 0 0 / .25)}
+.modal-h{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.modal-h h3{margin:0;font-size:16px;line-height:1.3}
+.modal-x{border:0;background:transparent;font-size:22px;line-height:1;cursor:pointer;color:var(--muted);padding:0 4px}
+.modal-sub{margin:0;color:var(--muted);font-size:13px}
+.secopts{display:flex;flex-direction:column;gap:8px}
+.secopt{display:flex;flex-direction:column;gap:3px;text-align:left;border:1px solid var(--line-strong);background:var(--surface-2);border-radius:10px;padding:10px 12px;cursor:pointer}
+.secopt:hover,.secopt:focus-visible{border-color:var(--star);background:var(--surface)}
+.so-h{display:flex;align-items:center;gap:8px}
+.so-m{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.so-i{font-size:12.5px}
+.modal-f{display:flex;justify-content:flex-end;gap:8px}
+.ffoot{position:sticky;bottom:-14px;margin:6px -14px -14px;background:var(--surface);z-index:2}
+.ffoot .si{color:var(--star)}
+.ffoot b{font-size:18px;color:var(--ink)}
+.chevron{color:var(--faint);transition:transform .15s}
+.course.open .chevron{transform:rotate(180deg)}
+
+.body{border-top:1px solid var(--line);padding:14px 16px 16px 50px;display:flex;flex-direction:column;gap:16px;background:var(--surface)}
+.sec-h{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 6px}
+.desc{margin:0;max-width:75ch;color:var(--ink)}
+.desc a{color:var(--accent)}
+.kv{display:flex;flex-wrap:wrap;gap:6px 24px;font-size:13px}
+.kv span{color:var(--muted)}
+.sections{display:flex;flex-direction:column;gap:10px}
+.section{border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:10px;background:var(--surface-2)}
+.section-top{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13px;font-variant-numeric:tabular-nums}
+.section-top .k{color:var(--muted)}
+.mtgs{display:flex;flex-direction:column;gap:2px;font-size:13px;font-family:var(--mono)}
+.note{font-size:12.5px;color:var(--muted);border-left:2px solid var(--line-strong);padding-left:8px;overflow-wrap:anywhere}
+.instr{display:flex;flex-direction:column;gap:8px;border-top:1px dashed var(--line);padding-top:10px}
+.instr-h{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.instr-h b{font-size:13.5px}
+.instr-h .m{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.scores{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:5px 24px}
+.score{display:grid;grid-template-columns:minmax(0,1fr) 72px 36px;align-items:center;gap:8px;font-size:12px}
+.score .l{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.score .tr{position:relative;height:6px;border-radius:3px;background:var(--bar-bg)}
+.score .tr i{display:block;height:100%;background:var(--bar);border-radius:3px}
+.score .tr b{position:absolute;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:var(--surface-2);box-shadow:0 0 0 2px var(--ink)}
+.score .v{font-family:var(--mono);text-align:right;font-size:12px}
+.medkey{margin-left:10px;text-transform:none;letter-spacing:0;font-weight:400;color:var(--faint);display:inline-flex;align-items:center;gap:6px}
+.medkey b{width:8px;height:8px;border-radius:50%;background:var(--surface-2);box-shadow:0 0 0 2px var(--ink)}
+.score.hl .l{color:var(--ink);font-weight:600}
+.noeval{font-size:12.5px;color:var(--faint);font-style:italic}
+.empty{padding:40px 16px;text-align:center;color:var(--muted);border:1px dashed var(--line-strong);border-radius:10px}
+
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr}
+  aside.filters{position:static;max-height:none}
+  aside.filters.closed{display:none}
+  .filters-toggle{display:inline-flex}
+  header.top{position:static}
+}
+@media (max-width:560px){
+  .head{grid-template-columns:auto minmax(0,1fr)}
+  .right{grid-column:1 / -1;padding-left:8px;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:8px}
+  .pills{gap:4px}
+  .load .ll{letter-spacing:.03em}
+  .load .lv{min-width:0}
+  .right .chevron{display:none}
+  .body{padding-left:14px}
+  .score{grid-template-columns:minmax(0,1fr) 70px 34px}
+}
+
+/* tabs */
+.tabs{display:flex;gap:2px;background:var(--surface-2);border:1px solid var(--line);border-radius:9px;padding:3px}
+.tab{border:0;background:transparent;padding:6px 14px;border-radius:7px;cursor:pointer;font-weight:500;color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgb(0 0 0 / .08)}
+/* schedule */
+:root{
+  --t-full-bg:#EEE6F7; --t-full:#6B2BA8; --t-h1-bg:#DDF1ED; --t-h1:#1C7466; --t-h2-bg:#FBEED6; --t-h2:#A8690F;
+  --t-int-bg:#ECEBEF; --t-int:#6E6A7C; --t-x-bg:#FCE1DB; --t-x:#C0341D; --t-x-ink:#8E2415; --grid:#ECEAF1;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --t-full-bg:#2F2344; --t-full:#B98AE6; --t-h1-bg:#15322D; --t-h1:#5CC7B5; --t-h2-bg:#372B14; --t-h2:#E7B45A;
+  --t-int-bg:#2A2833; --t-int:#A09BB0; --t-x-bg:#43201A; --t-x:#F07A62; --t-x-ink:#FFC2B5; --grid:#26222F;}}
+:root[data-theme="dark"]{
+  --t-full-bg:#2F2344; --t-full:#B98AE6; --t-h1-bg:#15322D; --t-h1:#5CC7B5; --t-h2-bg:#372B14; --t-h2:#E7B45A;
+  --t-int-bg:#2A2833; --t-int:#A09BB0; --t-x-bg:#43201A; --t-x:#F07A62; --t-x-ink:#FFC2B5; --grid:#26222F;}
+.tp-full{--c:var(--t-full);--cb:var(--t-full-bg)} .tp-h1{--c:var(--t-h1);--cb:var(--t-h1-bg)}
+.tp-h2{--c:var(--t-h2);--cb:var(--t-h2-bg)} .tp-int{--c:var(--t-int);--cb:var(--t-int-bg)}
+.sched{display:grid;grid-template-columns:300px minmax(0,1fr);gap:24px;padding-top:16px;align-items:start}
+.sbar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 84px);max-height:calc(100vh - 100px);display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.sbar .search{padding:12px 12px 8px}
+.sbar-actions{display:flex;gap:12px;padding:0 14px 8px;font-size:12px}
+.slist{overflow:auto;flex:1;padding:0 6px 8px}
+.sgroup-h{position:sticky;top:0;z-index:1;background:var(--surface);display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding:10px 8px 6px}
+.sgroup-h .star-i{color:var(--star)}
+.sdivider{height:0;border-top:2px solid var(--line-strong);margin:8px 8px 0}
+.sitem{display:grid;grid-template-columns:auto 8px minmax(0,1fr) auto;gap:4px 8px;align-items:start;padding:7px 8px;border-radius:7px;cursor:pointer}
+.sitem:hover{background:var(--surface-2)}
+.sitem input{accent-color:var(--accent);margin:2px 0 0;width:15px;height:15px}
+.sitem .dot{width:8px;height:8px;border-radius:2px;background:var(--c);margin-top:6px}
+.sitem .t{font-size:13px;font-weight:500;line-height:1.3}
+.sitem .m{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:2px}
+.sitem .cr{font-family:var(--mono);font-size:11px;color:var(--faint);white-space:nowrap;margin-top:2px}
+.sitem.x .t{color:var(--t-x)}
+.shint{font-size:12px;color:var(--faint);padding:2px 8px 6px}
+.sfoot{border-top:1px solid var(--line);padding:10px 14px;display:flex;justify-content:space-between;align-items:baseline;font-variant-numeric:tabular-nums}
+.sfoot b{font-size:18px}
+.sfoot span{color:var(--muted);font-size:12px}
+.cal-wrap{display:flex;flex-direction:column;gap:12px;min-width:0}
+.plans{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;align-items:stretch}
+.ptab{display:inline-flex;align-items:center;gap:7px;flex:none;border:1px solid var(--line);background:var(--surface-2);border-radius:9px;padding:6px 10px;font-size:13px;color:var(--muted);cursor:pointer;white-space:nowrap}
+.ptab:hover{border-color:var(--line-strong)}
+.ptab.on{background:var(--surface);border-color:var(--accent);color:var(--ink);box-shadow:inset 0 -2px 0 var(--accent)}
+.ptab .pn{font-weight:600}
+.ptab .pc{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.ptab .pdot{width:7px;height:7px;border-radius:50%;background:var(--t-x)}
+.ptab .px,.ptab .pedit{border:0;background:transparent;cursor:pointer;color:var(--faint);padding:0 2px;line-height:1;display:inline-grid;place-items:center;border-radius:4px}
+.ptab .px{font-size:16px}
+.ptab .px:hover,.ptab .pedit:hover{color:var(--ink);background:var(--line)}
+.ptab.padd{font-size:17px;font-weight:500;padding:4px 12px;color:var(--accent)}
+.ptab.confirm{cursor:default;gap:10px;color:var(--ink)}
+.ptab.editing{padding:3px 6px;cursor:text}
+.pname-in{border:1px solid var(--line-strong);border-radius:6px;padding:3px 7px;width:150px;font-weight:600;background:var(--surface)}
+.plan-tools{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:12px;margin-top:-4px}
+.pcode{border:1px solid var(--line-strong);border-radius:6px;padding:3px 7px;font-family:var(--mono);font-size:11.5px;width:min(320px,100%);background:var(--surface)}
+.pimp{display:inline-flex;gap:6px;align-items:center;flex-wrap:wrap}
+.pmsg{color:var(--muted)}
+.cal-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
+.cal-top h2{margin:0;font-size:16px;font-weight:600;margin-right:auto}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;background:var(--cb);border-left:3px solid var(--c)}
+.legend i.xx{background:var(--t-x-bg);border-color:var(--t-x)}
+.cal-scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.cal{display:grid;grid-template-columns:56px repeat(7,minmax(128px,1fr));min-width:952px}
+.cal-h{position:sticky;top:0;background:var(--surface-2);border-bottom:1px solid var(--line);padding:8px 4px;text-align:center;font-weight:600;font-size:13px}
+.cal-h:first-child{border-right:1px solid var(--line)}
+.cal-h small{display:block;font-weight:400;color:var(--faint);font-size:11px}
+.cal-h.we{color:var(--muted)}
+.tcol{position:relative;border-right:1px solid var(--line)}
+.tlabel{position:absolute;right:8px;transform:translateY(-50%);font-family:var(--mono);font-size:11px;color:var(--faint);background:var(--surface);padding:0 2px}
+.dcol{position:relative;border-right:1px solid var(--grid);background-image:repeating-linear-gradient(to bottom,var(--grid) 0 1px,transparent 1px var(--hh))}
+.dcol:last-child{border-right:0}
+.dcol.we{background-color:var(--surface-2)}
+.ev{position:absolute;border-radius:6px;background:var(--cb);border-left:3px solid var(--c);padding:4px 6px;overflow:hidden;font-size:11.5px;line-height:1.25;display:flex;flex-direction:column;gap:1px;color:var(--ink);box-shadow:0 0 0 1px var(--surface)}
+.ev.short .et{-webkit-line-clamp:1}
+.ev.int{background-image:repeating-linear-gradient(135deg,transparent 0 6px,color-mix(in srgb,var(--c) 14%,transparent) 6px 8px)}
+.ev.x{--c:var(--t-x);--cb:var(--t-x-bg);color:var(--t-x-ink)}
+.ev>span{flex-shrink:0}
+.ev .et{font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ev .em{font-family:var(--mono);font-size:10.5px;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev .ei{font-family:var(--sans);font-style:italic}
+.sitem .mi{font-family:var(--sans);font-size:11.5px;margin-top:1px}
+.ev .ed{font-family:var(--mono);font-size:10.5px;font-weight:500;color:var(--c);white-space:nowrap}
+.ev.x .ed{color:var(--t-x)}
+.cal-empty{padding:28px 16px;text-align:center;color:var(--muted);font-size:13px}
+.cbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.cbar h3{margin:0;font-size:14px;font-weight:600}
+.cbadge{font-family:var(--mono);font-size:12px;border-radius:6px;padding:2px 8px;background:var(--good-bg);color:var(--good)}
+.cbadge.bad{background:var(--t-x-bg);color:var(--t-x)}
+.cbar .tg{margin-left:auto}
+.clist{flex-basis:100%;display:flex;flex-direction:column;gap:6px;font-size:13px}
+.clist div{border-left:3px solid var(--t-x);padding:2px 0 2px 10px}
+.clist .d{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.notime{font-size:12.5px;color:var(--muted)}
+.ilist{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.ilist h3{margin:0;font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px}
+.ilist h3 span{font-family:var(--mono);font-size:12px;background:var(--t-int-bg);color:var(--t-int);border-radius:6px;padding:1px 7px}
+.iitem{border-left:3px solid var(--t-int);padding:2px 0 2px 10px;display:flex;flex-direction:column;gap:4px}
+.ihead{display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline}
+.ihead b{font-size:13.5px}
+.im{font-size:12px;color:var(--muted)}
+.iitem ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 8px}
+.iitem li{display:inline-flex;gap:6px;font-family:var(--mono);font-size:11.5px;background:var(--t-int-bg);border-radius:6px;padding:2px 8px}
+.idate{font-weight:600;color:var(--ink)}
+.itime{color:var(--muted)}
+.iitem.idup{border-left-color:var(--t-x)}
+.iitem.idup .ihead b{color:var(--t-x)}
+.inote{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.inote a{color:var(--accent)}
+@media (max-width:900px){.sched{grid-template-columns:1fr}.sbar{position:static;max-height:420px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <h1>TMI Spring 2027 Courses</h1>
+      <div class="sub" id="sub"></div>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="tabbtn-courses" data-tab="courses" aria-selected="true">Courses</button>
+      <button class="tab" role="tab" id="tabbtn-schedule" data-tab="schedule" aria-selected="false">Schedule</button>
+    </div>
+    <button class="filters-toggle" id="ftoggle" aria-expanded="false">Filters</button>
+  </header>
+
+  <section id="tab-courses">
+  <div class="layout">
+    <aside class="filters closed" id="filters" aria-label="Filters">
+      <div class="search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Search code or title" autocomplete="off">
+      </div>
+      <label class="switch" style="padding:10px 2px 4px"><input type="checkbox" id="starOnly"> Starred only</label>
+      <div id="groups"></div>
+      <div class="sfoot ffoot"><span><span class="si">★</span> <b id="st-n">0</b> starred</span><span><b id="st-u">0</b> credits</span></div>
+    </aside>
+
+    <main>
+      <div class="toolbar">
+        <div class="count" id="count"></div>
+        <button class="linkbtn" id="clearAll">Clear all filters</button>
+        <button class="linkbtn" id="collapseAll">Collapse all</button>
+        <label class="sort" for="sort">Sort
+          <select id="sort">
+            <option value="code">Course code</option>
+            <option value="title">Title</option>
+          </select>
+        </label>
+      </div>
+      <div class="active" id="active"></div>
+      <div class="list" id="list"></div>
+    </main>
+  </div>
+  </section>
+
+  <section id="tab-schedule" hidden>
+    <div class="sched">
+      <aside class="sbar" aria-label="Courses to place on the calendar">
+        <div class="search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" style="left:22px"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="sq" type="search" placeholder="Search course name or code" autocomplete="off">
+        </div>
+        <div class="sbar-actions"><button class="linkbtn" id="sSelStar">Select all starred</button><button class="linkbtn" id="sClear">Clear selection</button></div>
+        <div class="slist" id="slist"></div>
+        <div class="sfoot"><span><b id="sCount">0</b> selected</span><span><b id="sCred">0</b> credits</span></div>
+      </aside>
+      <div class="cal-wrap">
+        <div class="plans" id="plans" role="tablist" aria-label="Saved schedule plans"></div>
+        <div class="plan-tools" id="planTools"></div>
+        <div class="cal-top">
+          <h2>Weekly schedule · Spring 2027</h2>
+          <div class="legend">
+            <span class="tp-full"><i></i>Full semester</span>
+            <span class="tp-h1"><i></i>1st half</span>
+            <span class="tp-h2"><i></i>2nd half</span>
+            
+            <span><i class="xx"></i>Conflict</span>
+          </div>
+        </div>
+        <div class="cal-scroll"><div class="cal" id="cal"></div></div>
+        <div class="notime" id="notime" hidden></div>
+        <div class="ilist" id="ilist" hidden></div>
+        <div class="cbar" id="cbar"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="modal" id="secModal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="secModalTitle">
+    <div class="modal-h"><h3 id="secModalTitle"></h3><button class="modal-x" data-close aria-label="Close">×</button></div>
+    <p class="modal-sub" id="secModalSub"></p>
+    <div class="secopts" id="secModalList"></div>
+    <div class="modal-f"><button class="tg" data-close>Cancel</button><button class="tg on" id="secModalAll">Star all sections</button></div>
+  </div>
+</div>
+<script id="data" type="application/json">{"meta":{"term":"Spring 2027","program":"NYU Tandon · Technology, Management & Innovation (MG-GY)","generated":"2026-10-20","source":"MG-GY class search PDF (Spring 2027)"},"courses":[{"course_code":"MG-GY 6013","also_listed":["MG-GY 6013G"],"title":"Organizational Behavior","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"Introduction to theory, research and practice to better understand human behavior in organizations. Topics include motivation and job satisfaction; decision making; group dynamics; work teams; leadership; communication; power, politics and conflict; organization culture, structure and design; impact of technology; management of work stress; organizational change and development; and career management. Analysis of organizational behavior problems by self assessments, case studies and simulations.","prerequisites":"Prerequisite: Graduate Standing","sections":[{"section":"A","class_nbr":6344,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6013","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"R 2:00 pm - 4:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. MOT students during the first weeks of registration. Open only to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"B","class_nbr":6345,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6013","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"T 8:00 am - 10:30 am","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. MOT students during the first weeks of registration. Open only to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"C","class_nbr":6346,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6013","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"T 2:00 pm - 4:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. MOT students during the first weeks of registration. Open only to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"INET","class_nbr":6347,"instruction_mode":"Online","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6013","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"R 6:00 pm - 8:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Only open to students in the M.S. Management of Technology Tandon Online Program"}]},{"course_code":"MG-GY 6023","also_listed":["MG-GY 6023G"],"title":"Economics and Strategy","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"This is a course in Economics, Strategy and the Firm with a primary focus on the needs of managers. It draws upon a range of concepts and tools from the fields of Industrial Organization and Strategic Management to review the cognitive building blocks that provide an economic foundation to strategic thinking. Strategy is ultimately about value creation and capture of economic value. Value-based strategies show that a firm that introduces a technological innovation creates value, and if it fails to protect it from competition it will be driven out of business. This basic level of insight is lin…","prerequisites":"","sections":[{"section":"A","class_nbr":6362,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6023","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"M 2:00 pm - 4:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. MOT students during the first weeks of registration. Open only to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"B","class_nbr":6363,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6023","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"W 2:00 pm - 4:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. MOT students during the first weeks of registration. Open only to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"INET","class_nbr":6364,"instruction_mode":"Online","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6023","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"TR 6:00 pm - 7:15 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Only open to students in the M.S. Management of Technology Tandon Online Program"}]},{"course_code":"MG-GY 6033","also_listed":["MG-GY 6033G"],"title":"Financial Analysis for Tech Managers","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"The course will focus upon accounting issues as well as financing and investment functions/decisions of the financial manager as applied to practical real world situations. We will first cover basic concepts of accounting (including cost accounting); as well as basic concepts of finance. Some of the course will involve analysis of actual case studies of real business situations. In the process of analyzing the cases students will be able to apply these accounting and finance concepts to actual business problems and their solutions.","prerequisites":"Prerequisite(s): Graduate Standing","sections":[{"section":"A","class_nbr":6365,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6033","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"F 8:00 am - 10:30 am","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. MOT students during the first weeks of registration. Open only to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"B","class_nbr":6366,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6033","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"F 11:00 am - 1:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. MOT students during the first weeks of registration. Open only to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"C","class_nbr":6367,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6033","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"F 11:00 am - 1:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. MOT students during the first weeks of registration. Open only to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"INET","class_nbr":6368,"instruction_mode":"Online","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6033","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"Sa 3:00 pm - 5:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Only open to students in the M.S. Management of Technology Tandon Online Program"}]},{"course_code":"MG-GY 6063","also_listed":["IE-GY 6063"],"title":"Designing for Human-AI Teaming and Collaborative Technologies","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"New technologies have always disrupted how we work, from personal computers to (more recently) generative AI. To ensure these disruptions augment workers and not burden them, we need to understand how new applications shape not just tasks, but the entire socio-technical setting of collaborative work. Why do advanced sophisticated technologies sometimes make work worse? How do humans coordinate with each other through digital tools? What are ways humans will appropriate AI agents to work better and not work more? This course will prepare students to differentiate themselves in tomorrow's workfo…","prerequisites":"","sections":[{"section":"A","class_nbr":18075,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"IE-GY 6063","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"M 11:00 am - 1:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":null}]},{"course_code":"MG-GY 6073","also_listed":[],"title":"Marketing","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"This course emphasizes the imperative to be customer-focused in the information sectors. Topics include market definition and redefinition due to technological change; analysis of customer decisions; strategic choices of markets and products; positioning for competitive success; product pricing, distribution and communications decisions; new product development; market-system dynamics and the value chain.","prerequisites":"Prerequisite: Graduate Standing","sections":[{"section":"A","class_nbr":6360,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6073","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"T 2:00 pm - 4:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"B","class_nbr":18076,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6073","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"R 11:00 am - 1:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":null},{"section":"INET","class_nbr":22192,"instruction_mode":"Online","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6073","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"Sa 2:00 pm - 4:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":null}]},{"course_code":"MG-GY 6181","also_listed":[],"title":"Talent Management Systems","units":1.5,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"In this survey course, students gain a knowledge and understanding of the strategies and range of processes, methods and tools that organizations use in effective Talent Management programs. The focus is on developing and managing leadership talent and on Talent Management practices for general management, professional, technical and other positions. Topics include identifying and competing for critical talent pools; alignment and integration of HR practices; recruiting and employment branding; identifying, selecting, developing, reviewing and managing leadership talent; retention and recognit…","prerequisites":"","sections":[{"section":"DIST","class_nbr":6349,"instruction_mode":"Online","alternate_schedule":false,"session_term":"2nd half","component":"Lecture","listed_code":"MG-GY 6181","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"F 2:00 pm - 4:45 pm","dates":"03/10-05/04"}],"instructors":[],"notes":"Open only to M.S. IE students and M.S. MOT students. All other students must request permission by emailing tmi@nyu.edu."}]},{"course_code":"MG-GY 6183","also_listed":[],"title":"Communication for Tech Managers","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"This highly interactive and participative experience introduces powerful concepts and approaches for effective technical communication, strategy, and delivery. Deliverables will include written documents and oral presentations. You will present both individually and in a team, and will receive feedback to improve your presentation effectiveness.","prerequisites":"Prerequisites: Graduate Standing","sections":[{"section":"A","class_nbr":6379,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6183","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"Sa 12:00 pm - 2:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. IE students and M.S. MOT students. All other students must request permission by emailing tmi@nyu.edu."}]},{"course_code":"MG-GY 6193","also_listed":["MG-GY 6193G"],"title":"Statistics for Data Analysts","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"The course is an excellent introduction to statistical tools used in any aspect of business. It covers thoroughly key probability concepts and statistical techniques used in the analysis of financial, economic and accounting data. In addition to descriptive statistics, probability, and hypothesis testing, this course also covers regression analysis and time series analysis with an emphasis on model formulation and interpretation of results. The use of spreadsheets (to facilitate most of the analysis in this class) will be introduced and developed as well through case studies based on real-worl…","prerequisites":"","sections":[{"section":"A","class_nbr":6385,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6193","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"R 2:00 pm - 4:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. IE students and M.S. MOT students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"B","class_nbr":6386,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6193","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"T 2:00 pm - 4:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. IE students and M.S. MOT students. All other students must request permission by emailing tmi@nyu.edu."}]},{"course_code":"MG-GY 6203","also_listed":["MG-GY 6203G"],"title":"Data Visualization for Business Intelligence","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"Huge volumes of data are generated, stored and analyzed to drive complex technical and business decisions by providing actionable insights. To achieve this end-users across the industry, need to visualize the data in diverse representations and perform explanatory and exploratory analysis. The course will provide a graduate-level introduction to Data Visualization, as a human perception friendly approach to convey concepts and analysis based on appropriately presented field data. It will systematically introduce building blocks, including types of data, visual elements and design approaches wi…","prerequisites":"","sections":[{"section":"A","class_nbr":6380,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6203","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"F 11:00 am - 1:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. IE students and M.S. MOT students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"B","class_nbr":6381,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6203","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"R 6:00 pm - 8:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. IE students and M.S. MOT students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"DIST","class_nbr":6382,"instruction_mode":"Online","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6203","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"M 6:00 pm - 8:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. IE students and M.S. MOT students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"INET","class_nbr":6383,"instruction_mode":"Online","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6203","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"M 6:00 pm - 8:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Only open to students in the M.S. Management of Technology Tandon Online Program"}]},{"course_code":"MG-GY 6303","also_listed":[],"title":"Operations Management","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"This course focuses on developing a deeper understanding of the role that operations management plays in determining business strategy and in developing competitive advantage. The primary emphasis is on how to develop and effectively manage operations in knowledge-intensive enterprises. Participants discuss the operational design and managerial implications when the emphasis of the operations group is more on knowledge management than on production and facilities management; managing the effective integration of technology, people and operating systems; understanding the complexities and…","prerequisites":"","sections":[{"section":"A","class_nbr":6369,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6303","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"M 2:00 pm - 4:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"B","class_nbr":6370,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6303","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"W 6:00 pm - 8:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."}]},{"course_code":"MG-GY 6373","also_listed":[],"title":"Human Capital Big Data, Predictive Analytics, & ROI","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"This course examines theories and applications of human capital, including its definitions, predictive analyses, and determining its value to the business by leveraging big data. The course will take a systems view and integrate human capital perspectives, concepts, and methods from economics, finance, psychology and business process re-engineering. Students will learn statistical methods to build predictive models of human capital and the software tools to conduct predictive analytics with big data. They will learn how to determine the economic and productivity benefits of human capital an…","prerequisites":"","sections":[{"section":"DIST","class_nbr":6354,"instruction_mode":"Online","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6373","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"T 6:00 pm - 8:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. IE students and M.S. MOT students. All other students must request permission by emailing tmi@nyu.edu."}]},{"course_code":"MG-GY 6463","also_listed":[],"title":"Supply Chain Management","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"This course introduces supply-chain management and covers its qualitative and quantitative aspects. The underlying objective is to: (1) introduce students to the standard business concepts (and associated terminology) involved in the retailing and supply-chain management; (2) develop skills in understanding and analyzing retailing, marketing, logistics, operations, channel management and allied issues and the interactions between them; and (3) examine and discuss the important role played by technology and integration at various points in the supply chain.","prerequisites":"Prerequisite: graduate standing.","sections":[{"section":"A","class_nbr":6330,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6463","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"M 6:00 pm - 8:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"INET","class_nbr":20239,"instruction_mode":"Online","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6463","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"W 6:00 pm - 8:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":null}]},{"course_code":"MG-GY 6503","also_listed":[],"title":"Management of Information Technology and Information Systems","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"This course is designed for managers who need to understand the role and potential contribution of information technologies in organizations. The focus of the course is on different information technologies and their applications in managing business critical data, information and knowledge. The course concentrates on the current state of IT in organizations, challenges and strategic use of IT, IT infrastructure and architecture, building, implementing and managing IT applications, and emerging issues such as intelligent systems, business process reengineering, knowledge management and group s…","prerequisites":"","sections":[{"section":"A","class_nbr":6372,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 6503","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"Sa 9:00 am - 11:30 am","dates":"01/19-05/04"}],"instructors":[],"notes":"Open to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."}]},{"course_code":"MG-GY 7503","also_listed":[],"title":"Digital Business Management","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"This course will explore several trends that have emerged in Digital Business in terms of Customers, Competition, Data, Innovation, Technology and Value Propositions. We will learn about the world's most innovative Digital Business companies, their organization and strategies. We will also examine the failures and lessons learned of legacy business in the digital age.","prerequisites":"Prerequisite: Graduate Standing","sections":[{"section":"INET","class_nbr":6336,"instruction_mode":"Online","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 7503","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"W 5:00 pm - 7:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Only open to students in the M.S. Management of Technology Tandon Online Program"}]},{"course_code":"MG-GY 7703","also_listed":[],"title":"Entrepreneurship","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"This course focuses on entrepreneurship and venture creation as key engines for wealth creation and successful business strategy in the modern, innovation- intensive, high-tech economy. The course deals with key issues such as: (1) assessing attractiveness of opportunities; (2) launching a new venture; (3) nurturing, growing and entrepreneurial venture; (4) obtaining the necessary financial, human and technology resources; (5) managing the transition from a small entrepreneurial firm to a large, sustainable, professionally managed but still entrepreneurial corporation; and (6) being an en…","prerequisites":"","sections":[{"section":"A","class_nbr":6331,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 7703","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"R 6:00 pm - 8:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"B","class_nbr":6332,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 7703","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"W 6:00 pm - 8:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"This course is open only to M.S. Mechatronic and Robotics students. MOT, IE, BTE students should select sections A or C."},{"section":"C","class_nbr":6333,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 7703","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"M 6:00 pm - 8:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"D","class_nbr":22308,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 7703","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"M 2:00 pm - 4:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":null}]},{"course_code":"MG-GY 7953","also_listed":["MG-GY 7953G"],"title":"Global Innovation","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"This course focuses on global technology-enabled innovation. Topics covered include accessing global sources of innovation, coordination and organization of activities worldwide, new product development globally, the role of revitalized global R&D, growing prominence of IT and e-Business in global innovation, and the role of alliances and linkages with customers, suppliers and other third parties.","prerequisites":"Prerequisite: Graduate Standing","sections":[{"section":"A","class_nbr":6334,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 7953","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"F 2:00 pm - 4:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. MOT students during the first weeks of registration. Open only to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"B","class_nbr":6335,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 7953","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"F 6:00 pm - 8:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. MOT students during the first weeks of registration. Open only to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"C","class_nbr":18080,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 7953","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"Sa 9:00 am - 11:30 am","dates":"01/19-05/04"}],"instructors":[],"notes":null}]},{"course_code":"MG-GY 8203","also_listed":[],"title":"Project Management","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"This course focuses on managing technology- based projects, ranging from individual research and development to large-scale and complex technological systems. It covers topics such as feasibility and risk analyses, project selection and portfolio optimization, functional and administrative structures, coordination and scheduling of activities, personnel planning, negotiations and contracts, cost estimation, capital budgeting, cost controls and effective matrix management.","prerequisites":"Prerequisite: Adviser’s approval and Graduate Standing","sections":[{"section":"A","class_nbr":6355,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 8203","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"Sa 12:00 pm - 2:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."}]},{"course_code":"MG-GY 8233","also_listed":[],"title":"Quality Management/Six-Sigma","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"Quality Management is a comprehensive approach for leading and operating an organization, aimed at continually improving performance over the long term by focusing on customers while addressing the needs of all stakeholders. The bottom line of QM is results: increased productivity, efficiency, customer satisfaction/delight, and world-class performance. This course will present the various QM frameworks, concepts, and quality improvement tools, including, TQM, Six Sigma, Lean and Lean Six Sigma, etc. that are necessary for implementing the quality culture that characterizes world-class organ…","prerequisites":"","sections":[{"section":"INET","class_nbr":18082,"instruction_mode":"Online","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 8233","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"T 6:00 pm - 8:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":null}]},{"course_code":"MG-GY 8303","also_listed":[],"title":"Human Resource Management Systems","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"To gain a fairly complete understanding of the role and function of HR in any organization and how it must leverage the use of supportive HR TECHNOLOGY to accomplish strategic initiatives. This will include understanding the role of Human Resources Management systems in support of specific functions and processes within the HR function such as recruiting, performance management, benefits administration, and government compliance, as well as an understanding of the overall objective of the function itself in helping any organization achieve and maintain success and profitability and viability.…","prerequisites":"","sections":[{"section":"A","class_nbr":6391,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 8303","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"T 2:00 pm - 4:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."}]},{"course_code":"MG-GY 8363","also_listed":[],"title":"Fundamentals of Information Security Management","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"The course and lectures will cover some of the fundamental areas of information security including cyber threats, identity & access management, data protection, incident response, third party risk, security monitoring, security outsourcing, and mobile security.","prerequisites":"","sections":[{"section":"INET","class_nbr":6394,"instruction_mode":"Online","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 8363","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"Sa 9:00 am - 11:30 am","dates":"01/19-05/04"}],"instructors":[],"notes":null}]},{"course_code":"MG-GY 8401","also_listed":[],"title":"Programming for Business Intelligence and Analytics","units":1.5,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"Data will increasingly drive business decisions across industries. While statistics provides methods for analyzing, forecasting and evaluating data, programming provides methods for extracting, manipulating and visualizing data. This 1.5 credit course will meet for 7 weeks throughout the semester to complement Statistics for Business Analysts. Through a focus on case studies, students will gain the programming experience needed for electives in several knowledge areas pertinent to data science. By learning integrative approaches to formulating problems, students can take programming out of the…","prerequisites":"","sections":[{"section":"A","class_nbr":6377,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"1st half","component":"Lecture","listed_code":"MG-GY 8401","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"Sa 12:00 pm - 2:45 pm","dates":"01/19-03/09"}],"instructors":[],"notes":"Open only to M.S. IE students and M.S. MOT students. All other students must request permission by emailing tmi@nyu.edu."}]},{"course_code":"MG-GY 8411","also_listed":[],"title":"Data Engineering","units":1.5,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"This course complements Statistics for Business Analysts, in coordination with Programming for Business Intelligence and Analytics. Through a focus on case studies, students will gain the experience needed for electives in several knowledge areas pertinent to data science. By learning how to structure and organize data for descriptive (unsupervised) and predictive (supervised) modeling, students can take preparation of data for AI out of the lab and into industry.","prerequisites":"","sections":[{"section":"A","class_nbr":6378,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"2nd half","component":"Lecture","listed_code":"MG-GY 8411","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"Sa 3:00 pm - 5:45 pm","dates":"03/10-05/04"}],"instructors":[],"notes":"Open only to M.S. IE students and M.S. MOT students. All other students must request permission by emailing tmi@nyu.edu."}]},{"course_code":"MG-GY 8413","also_listed":[],"title":"Business Analytics","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"Business analytics is a set of data analysis and modeling techniques for understanding business situations and improving business decisions. This course introduces business analytics concepts, methods and tools with concrete examples from industry applications. In the first part of the course, we will focus on descriptive analytics and exploratory data analysis concepts with a refresher on basic probability and statistics. In the second part, we will cover principles, techniques, and techniques for spatial data, time series, and text as data. The final part of the course will introduce a proje…","prerequisites":"","sections":[{"section":"DIST","class_nbr":6384,"instruction_mode":"Online","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 8413","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"R 2:00 pm - 4:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. MOT students by permission. Email tmi@nyu.edu to request permission."}]},{"course_code":"MG-GY 8423","also_listed":[],"title":"Machine Learning for Business","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"Machine learning is about extracting or discovering knowledge from data. This course will cover fundamental machine learning algorithms used to understand business situations and improve business decisions. In machine learning, there are three types of commonly used algorithms: supervised (predictive), unsupervised (descriptive) and reinforcement learning algorithms. In the first part of the course, we will focus on supervised learning algorithms including K-Nearest Neighbors, Linear Regression, Logistic Regression, Decision Tree, Support Vector Machine (SVM), Naive Bayes, bagging and boosting…","prerequisites":"","sections":[{"section":"A","class_nbr":6390,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 8423","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"R 6:00 pm - 8:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. IE students and M.S. MOT students. All other students must request permission by emailing tmi@nyu.edu."}]},{"course_code":"MG-GY 8503","also_listed":[],"title":"FinTech: Finance Industry Transformation","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"With the continued success of fintech (financial technology) businesses around the world - from virtual banks to crypto exchanges and blockchain solutions - financial services are becoming increasingly decentralized, personalized, and automated. This course is designed to provide students with a comprehensive understanding of the latest technological advancements shaping the finance industry. It will cover topics such as APIs, decentralized finance, cloud computing, artificial intelligence, machine learning, blockchain, financial crime, RegTech, and algorithmic trading. Students will learn ho…","prerequisites":"","sections":[{"section":"A","class_nbr":19275,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 8503","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"F 2:00 pm - 4:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. IE students and M.S. MOT students. All other students must request permission by emailing tmi@nyu.edu."}]},{"course_code":"MG-GY 8623","also_listed":[],"title":"Design Strategies","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"As change has become one of the only constants in today’s economy, established businesses are being disrupted, and business strategies need to be constantly re-framed. To be successful companies cannot only acquire more customers. They also need to successfully meet their customers’ changing needs, leverage technology to create new value propositions that are meaningful to them and generate revenues and sustainable growth for the business. To address these new demands, managers and entrepreneurs alike need a different set of tools and frameworks. Design thinking, a human-centered approach to i…","prerequisites":"","sections":[{"section":"A","class_nbr":6388,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 8623","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"W 6:00 pm - 8:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. IE students and M.S. MOT students. All other students must request permission by emailing tmi@nyu.edu."}]},{"course_code":"MG-GY 8673","also_listed":[],"title":"Technology Strategy","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"This course examines in depth the strategic technological decisions that a general manager faces. From entrepreneurial start-ups to established companies, in dynamic as well as mature environments, a firm must create a conscious process of formulating and implementing a technology strategy to serve its business interests. Such a strategy guides investments in research and development, selection among and timing of alternate technologies, organization and communications, formation of alliances and funding of ventures.","prerequisites":"Prerequisite: Graduate Standing","sections":[{"section":"A","class_nbr":6373,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 8673","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"M 6:00 pm - 8:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open to M.S. MOT, M.S. IE and M.S. BTE students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"INET","class_nbr":6374,"instruction_mode":"Online","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 8673","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"M 6:00 pm - 8:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Only open to students in the M.S. Management of Technology Tandon Online Program"}]},{"course_code":"MG-GY 8683","also_listed":[],"title":"Economics and Strategies for Digital Platforms","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"The goal of this course is to equip students with the economic tools and strategic thinking necessary to understand how platform markets function and how to carefully analyze, evaluate and develop strategies for digital platforms. This course will cover topics that help inform platform strategy, such as two-sided markets, first mover advantage, network effects, the chicken-or-egg dilemma, monetization strategies, freemium models, intellectual property rights, startup strategy, crowdsourcing applications, platform governance and regulation issues, among others. The course will apply strategic t…","prerequisites":"","sections":[{"section":"DIST","class_nbr":6387,"instruction_mode":"Online","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 8683","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"T 5:00 pm - 7:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. IE students and M.S. MOT students. All other students must request permission by emailing tmi@nyu.edu."}]},{"course_code":"MG-GY 8813","also_listed":["CUSP-GX 8813"],"title":"Design for Innovation with AI & ML","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"Product and service innovations are increasingly delivered through digital platforms built on artificial intelligence (AI), and in particular machine learning (ML). The goal of this course is to expose students to methods for understanding the opportunities and challenges that designing with AI and ML foreground. The course adopts a human-centered perspective and systemic approach that considers the impact of these technologies on ethical concerns, sustainability and social innovation. Students will learn skills and techniques for conceptualizing digital platforms that use A.I. and ML to suppo…","prerequisites":"","sections":[{"section":"A","class_nbr":18083,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 8813","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"T 2:00 pm - 4:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":null},{"section":"A","class_nbr":18092,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"CUSP-GX 8813","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"T 2:00 pm - 4:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"This course is open exclusively to graduate students. Undergraduate students should consult their academic advisor and contact CUSP at CUSP.Education@nyu.edu for guidance. Registration for this course will be available to all non-departmental NYU graduate students (subject to prerequisites) starting December 1, 2026."}]},{"course_code":"MG-GY 8873","also_listed":["CUSP-GX 8873"],"title":"Urban Computing and Artificial Intelligence","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"The course aims to equip students with the technical and analytical capacity to use state-of-the-art AI techniques for urban data science. It also seeks to foster thought leadership by encouraging critical thinking about the societal implications of urban computing and AI applications. This course begins with a recap of deep learning methods for spatial-temporal data and its practical applications in urban management. The course then delves into generative AI, providing an overview of models such as GPT and Large Language Models (LLMs), with a focus on practical applications for urban governan…","prerequisites":"","sections":[{"section":"A","class_nbr":9196,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"CUSP-GX 8873","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"T 8:00 am - 10:30 am","dates":"01/19-05/04"}],"instructors":[],"notes":"This course is open exclusively to graduate students. Undergraduate students should consult their academic advisor and contact CUSP at CUSP.Education@nyu.edu for guidance. Registration for this course will be available to all non-departmental NYU graduate students (subject to prerequisites) starting December 1, 2026."},{"section":"A","class_nbr":17992,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 8873","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"T 8:00 am - 10:30 am","dates":"01/19-05/04"}],"instructors":[],"notes":null}]},{"course_code":"MG-GY 9013","also_listed":[],"title":"Design Thinking for Creative Problem Solving","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"This course explores creativity and design-led innovation, important notions in today's world where companies are looking for creative, innovative and collaborative employees. This course deals in an applied and original way with the topic of creativity. The assumption underlying the course is that there is no such thing as creativity as a concept but that there is a creative process involving people, materials and a context. The emphasis in the course is on experiencing different methods and techniques that can help us be more creative in our work practices, careers and lives. In sum, you wi…","prerequisites":"","sections":[{"section":"A","class_nbr":6353,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 9013","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"T 6:00 pm - 8:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Open only to M.S. IE students and M.S. MOT students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"INET","class_nbr":18084,"instruction_mode":"Online","alternate_schedule":false,"session_term":"Full semester","component":"Lecture","listed_code":"MG-GY 9013","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"T 6:00 pm - 8:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":null}]},{"course_code":"MG-GY 9503","also_listed":[],"title":"MOT Capstone Project Course","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"This course provides an integrative and state-of-the-art intellectual experience for participants at the conclusion of the program. The course is divided into two half semesters. The first half semester enables participants to focus on discerning the overarching trends which are driving innovation in various industry sectors. The class is divided into small groups each of which develops a comprehensive view of a particular industry sector. In the second half of the course, participants focus on the culminating project of the IM program. Participants can choose to do their final projects on fir…","prerequisites":"","sections":[{"section":"BLND","class_nbr":6350,"instruction_mode":"Blended (Online & In-Person)","alternate_schedule":false,"session_term":"Full semester","component":"Project","listed_code":"MG-GY 9503","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"W 8:00 am - 10:30 am","dates":"01/19-02/03"},{"days_time":null,"dates":"02/04-05/04"}],"instructors":[],"notes":"Open only to M.S. IE students and M.S. MOT students. All other students must request permission by emailing tmi@nyu.edu."},{"section":"INET","class_nbr":6351,"instruction_mode":"Online","alternate_schedule":false,"session_term":"Full semester","component":"Project","listed_code":"MG-GY 9503","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"W 8:00 pm - 10:30 pm","dates":"01/19-05/04"}],"instructors":[],"notes":"Only open to students in the M.S. Management of Technology Tandon Online Program"}]},{"course_code":"MG-GY 9781","also_listed":[],"title":"Selected Topics in Management","units":1.5,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"Beyond Data: Genai-Driven Business Strategy Students analyze and discuss current topics in various fields.","prerequisites":"Prerequisites: Department’s Chair’s permission and Graduate standing","sections":[{"section":"A","class_nbr":6348,"instruction_mode":"In-Person","alternate_schedule":false,"session_term":"2nd half","component":"Lecture","listed_code":"MG-GY 9781","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":"R 6:00 pm - 8:45 pm","dates":"03/10-05/04"}],"instructors":[],"notes":"Course Repeatable for Credit. Open only to M.S. IE students and M.S. MOT students. All other students must request permission by emailing tmi@nyu.edu."}]},{"course_code":"MG-GY 9913","also_listed":[],"title":"Independent Research","units":3.0,"department":"Technology, Management & Innovation","schedule_department":"TMI","specializations":[],"description":"In this course, students undertake directed individual study or supervised readings in advanced areas of the thematic electives and are advised by the doctoral adviser. Three credits required. Prerequisite: Doctoral standing or instructor’s permission. Co-Requisite: None.","prerequisites":"","sections":[{"section":"BK01","class_nbr":6338,"instruction_mode":"Independent Studies","alternate_schedule":false,"session_term":"Full semester","component":"Independent Study","listed_code":"MG-GY 9913","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":null,"dates":"01/19-05/04"}],"instructors":[],"notes":"Course Repeatable for Credit. Department consent is required. Please email TMI@nyu.edu."},{"section":"BK02","class_nbr":6339,"instruction_mode":"Independent Studies","alternate_schedule":false,"session_term":"Full semester","component":"Independent Study","listed_code":"MG-GY 9913","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":null,"dates":"01/19-05/04"}],"instructors":[],"notes":"Course Repeatable for Credit."},{"section":"BK03","class_nbr":6340,"instruction_mode":"Independent Studies","alternate_schedule":false,"session_term":"Full semester","component":"Independent Study","listed_code":"MG-GY 9913","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":null,"dates":"01/19-05/04"}],"instructors":[],"notes":"Course Repeatable for Credit."},{"section":"BK04","class_nbr":6341,"instruction_mode":"Independent Studies","alternate_schedule":false,"session_term":"Full semester","component":"Independent Study","listed_code":"MG-GY 9913","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":null,"dates":"01/19-05/04"}],"instructors":[],"notes":"Course Repeatable for Credit."},{"section":"BK05","class_nbr":6342,"instruction_mode":"Independent Studies","alternate_schedule":false,"session_term":"Full semester","component":"Independent Study","listed_code":"MG-GY 9913","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":null,"dates":"01/19-05/04"}],"instructors":[],"notes":"Course Repeatable for Credit."},{"section":"BK06","class_nbr":6343,"instruction_mode":"Independent Studies","alternate_schedule":false,"session_term":"Full semester","component":"Independent Study","listed_code":"MG-GY 9913","status":"Open","location":"Brooklyn Campus","meetings":[{"days_time":null,"dates":"01/19-05/04"}],"instructors":[],"notes":"Course Repeatable for Credit."}]}]}</script>
+<script>
+(function(){
+const RAW = JSON.parse(document.getElementById('data').textContent);
+const META = RAW.meta, COURSES = RAW.courses;
+const SCORE_KEYS = ["Course overall","Instructor overall","Goals clear","Assignments effective","Intellectually stimulating","Instructor clear on expectations","Instructor explains concepts","Feedback helpful","Diverse perspectives","Inclusive environment"];
+const HOURS_KEY = "Hours/week outside class";
+const DAY_ORDER = ["M","T","W","R","F","Sa","Su"];
+const DAY_NAME = {M:"Mon",T:"Tue",W:"Wed",R:"Thu",F:"Fri",Sa:"Sat",Su:"Sun"};
+const TERM_ORDER = ["Full semester","1st half","2nd half","Intensive / travel"];
+const TERM_SHORT = {"Full semester":"Full","1st half":"1st half","2nd half":"2nd half","Intensive / travel":"Intensive"};
+const TIME_ORDER = ["Morning","Afternoon","Evening"];
+const LOAD_ORDER = ["Low","Medium","High"];
+
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const linkify = s => esc(s).replace(/https?:\/\/[^\s)]+[^\s).,;]/g, u => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`);
+const d2 = s => { const [m,d] = s.split('/').map(Number); return new Date(2027, m-1, d); };
+const DAY_MS = 864e5;
+
+function parseDays(s){ return (s.match(/Sa|Su|M|T|W|R|F/g) || []); }
+function parseStart(s){
+  const m = s.match(/(\d{1,2}):(\d{2})\s*(am|pm)/i); if(!m) return null;
+  let h = +m[1] % 12; if(m[3].toLowerCase()==='pm') h += 12; return h*60 + +m[2];
+}
+function fmtTime(dt){ return dt ? dt.replace(/:00 /g,' ').replace(/ am/g,'am').replace(/ pm/g,'pm') : 'TBA'; }
+function termOf(meetings){
+  const spans = meetings.map(m => { const [a,b] = m.dates.split('-').map(d2); return {a,b,dur:(b-a)/DAY_MS}; });
+  if (spans.every(s => s.dur <= 10)) return "Intensive / travel";
+  const L = spans.sort((x,y)=>y.dur-x.dur)[0];
+  if (L.b <= d2('03/26')) return "1st half";
+  if (L.a >= d2('03/20')) return "2nd half";
+  return "Full semester";
+}
+function wavg(items, key){
+  let s=0,w=0; for(const it of items){ const v=it.scores?.[key]; if(v==null) continue; const r=it.respondents||1; s+=v*r; w+=r; }
+  return w ? s/w : null;
+}
+
+/* ---------- derive ---------- */
+const allHours = [];
+COURSES.forEach(c => {
+  c.sections.forEach(s => {
+    s.term = s.session_term || termOf(s.meetings);
+    s.days = new Set(); s.times = new Set();
+    s.meetings.forEach(m => {
+      if (!m.days_time) { s.times.add("TBA"); return; }
+      parseDays(m.days_time.split(' ')[0]).forEach(d => s.days.add(d));
+      const st = parseStart(m.days_time);
+      s.times.add(st==null ? "TBA" : st < 720 ? "Morning" : st < 1020 ? "Afternoon" : "Evening");
+    });
+  });
+  const byInstr = new Map();
+  c.sections.forEach(s => s.instructors.forEach(i => { if(i.evaluation_2023_2026 && !byInstr.has(i.name)) byInstr.set(i.name, i.evaluation_2023_2026); }));
+  const evs = [...byInstr.values()];
+  c.evalCount = evs.length;
+  c.rating = wavg(evs, "Course overall");
+  c.instrRating = wavg(evs, "Instructor overall");
+  c.hours = wavg(evs, HOURS_KEY);
+  if (c.hours != null) allHours.push(c.hours);
+  c.instructorNames = [...new Set(c.sections.flatMap(s => s.instructors.map(i => i.name)))];
+  c.terms = new Set(c.sections.map(s => s.term));
+  c.search = [c.course_code, c.course_code.replace('.',' '), c.title, c.instructorNames.join(' '), c.sections.flatMap(s=>s.instructors.map(i=>i.full_name||'')).join(' ')].join(' ').toLowerCase();
+});
+allHours.sort((a,b)=>a-b);
+const MEDIAN = (() => {
+  const seen = new Map();
+  COURSES.forEach(c => c.sections.forEach(s => s.instructors.forEach(i => { if (i.evaluation_2023_2026) seen.set(c.course_code+'|'+i.name, i.evaluation_2023_2026.scores||{}); })));
+  const out = {};
+  [...SCORE_KEYS, HOURS_KEY].forEach(k => { const v=[...seen.values()].map(s=>s[k]).filter(x=>x!=null).sort((a,b)=>a-b); if (v.length) out[k] = v.length%2 ? v[(v.length-1)/2] : (v[v.length/2-1]+v[v.length/2])/2; });
+  return out;
+})();
+const q1 = allHours[Math.floor(allHours.length/3)], q2 = allHours[Math.floor(allHours.length*2/3)];
+COURSES.forEach(c => { c.load = c.hours==null ? null : c.hours < q1 ? "Low" : c.hours < q2 ? "Medium" : "High"; });
+
+/* specialization colors: by frequency, golden-angle hues */
+const specCount = {}; COURSES.forEach(c => c.specializations.forEach(s => specCount[s]=(specCount[s]||0)+1));
+const SPECS = Object.keys(specCount).sort((a,b)=>specCount[b]-specCount[a] || a.localeCompare(b));
+const SPEC_GROUPS = [
+  [270, ["Tech Product Management","Artificial Intelligence","Business Analytics","Management of Technology & Operations"]],
+  [215, ["Finance","Corporate Finance","Banking","Financial Instruments & Markets","Real Estate","Accounting"]],
+  [178, ["Quantitative Finance","FinTech","Financial Systems & Analytics"]],
+  [332, ["Marketing","Brand Management","Luxury Marketing","Digital Marketing","Entertainment, Media & Technology"]],
+  [38,  ["Management","Strategy","Leadership and Change Management"]],
+  [138, ["Entrepreneurship and Innovation","Sustainable Business and Innovation","Healthcare"]],
+  [12,  ["Global Business","Economics","Law & Business","Supply Chain Management & Global Sourcing"]]
+];
+const SPEC_HUE = {}; SPEC_GROUPS.forEach(([h,list]) => list.forEach(s => SPEC_HUE[s] = h));
+SPECS.forEach((s,i) => { if (SPEC_HUE[s]==null) SPEC_HUE[s] = Math.round((i*137.508 + 60) % 360); });
+const deptCount = {}; COURSES.forEach(c => deptCount[c.department]=(deptCount[c.department]||0)+1);
+const DEPTS = Object.keys(deptCount).sort();
+const countBy = fn => { const o={}; COURSES.forEach(c => fn(c).forEach(v => o[v]=(o[v]||0)+1)); return o; };
+const unitCount = countBy(c => [String(c.units)]);
+const UNITS = Object.keys(unitCount).sort((a,b)=>b-a);
+const termCount = countBy(c => [...c.terms]);
+const fmtCount = countBy(c => [...new Set(c.sections.map(s=>s.instruction_mode))]);
+const FORMATS = Object.keys(fmtCount);
+const timeCount = countBy(c => [...new Set(c.sections.flatMap(s=>[...s.times]))]);
+const loadCount = countBy(c => c.load ? [c.load] : []);
+const ratings = COURSES.map(c=>c.rating).filter(v=>v!=null);
+const R_MIN = Math.floor(Math.min(...ratings)*10)/10;
+
+/* ---------- state ---------- */
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v);}catch(e){return d;} },
+  set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+const CORE_DEFAULT = []; // COR1-GB.2114, COR2-GB.3151, INTA-GB.2000, INTA-GB.3322, OPMG-GB.3110 F2 (Lobel)
+const SEC_BY_KEY = new Map(); COURSES.forEach(c => c.sections.forEach(s => SEC_BY_KEY.set(String(s.class_nbr), c)));
+const CORE_CODES = new Set(CORE_DEFAULT.map(k => SEC_BY_KEY.get(k)?.course_code).filter(Boolean));
+const stars = (() => {
+  let s2 = store.get('tmi27.stars2', null);
+  if (!Array.isArray(s2)) {   // migrate old course-level stars: star every section of those courses
+    const old = new Set(store.get('tmi27.stars', []));
+    s2 = []; COURSES.forEach(c => { if (old.has(c.course_code)) c.sections.forEach(s => s2.push(String(s.class_nbr))); });
+  }
+  const set = new Set(s2.filter(k => SEC_BY_KEY.has(k)));
+  const applied = new Set(store.get('tmi27.coreApplied', []));
+  CORE_DEFAULT.forEach(k => { if (!applied.has(k) && SEC_BY_KEY.has(k)) { set.add(k); applied.add(k); } });
+  store.set('tmi27.coreApplied', [...applied]); store.set('tmi27.stars2', [...set]);
+  return set;
+})();
+const saveStars = () => store.set('tmi27.stars2', [...stars]);
+const starredSecs = c => c.sections.filter(s => stars.has(String(s.class_nbr)));
+const isStarred = c => c.sections.some(s => stars.has(String(s.class_nbr)));
+const openSet = new Set();
+const F = {
+  q:"", starOnly:false, specs:new Set(SPECS), depts:new Set(DEPTS), units:new Set(), terms:new Set(),
+  days:new Set(DAY_ORDER), times:new Set(), formats:new Set(), minRating:R_MIN, includeNoEval:true, loads:new Set(), sort:"code"
+};
+
+/* ---------- filter UI ---------- */
+const groupsEl = document.getElementById('groups');
+const HIDE_GROUPS = new Set(['spec','dept','rating','load']);
+function group(id, title, bodyHtml, open=true){
+  return `<details class="fg" id="g-${id}" ${open?'open':''} ${HIDE_GROUPS.has(id)?'hidden':''}><summary><span>${title} <span class="badge" data-badge="${id}" hidden></span></span><svg class="caret" width="10" height="10" viewBox="0 0 10 10"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></summary><div class="fg-body">${bodyHtml}</div></details>`;
+}
+const specChip = (s, extra="") => `<span class="chip" style="--h:${SPEC_HUE[s]}" ${extra}>${esc(s)}</span>`;
+const SPEC_SHOW = 8;
+const specRow = s => `<label class="check"><input type="checkbox" data-f="spec" value="${esc(s)}" checked><span class="lbl"><span class="chip" style="--h:${SPEC_HUE[s]}">${esc(s)}</span></span><span class="n">${specCount[s]}</span></label>`;
+const checkRow = (name, val, label, n, checked) => `<label class="check"><input type="checkbox" data-f="${name}" value="${esc(val)}" ${checked?'checked':''}><span class="lbl">${esc(label)}</span><span class="n">${n??''}</span></label>`;
+const tog = (name, val, label, n) => `<button class="tg" data-t="${name}" data-v="${esc(val)}" aria-pressed="false">${esc(label)}${n!=null?` <span style="opacity:.6">${n}</span>`:''}</button>`;
+
+groupsEl.innerHTML =
+  group('spec','Specialization',
+    `<div class="row-actions"><button class="linkbtn" id="specAll">Select all</button><button class="linkbtn" id="specNone">Deselect all</button></div>
+     <div class="checks">${SPECS.slice(0,SPEC_SHOW).map(specRow).join('')}</div>
+     <div class="checks" id="specMore" hidden>${SPECS.slice(SPEC_SHOW).map(specRow).join('')}</div>
+     ${SPECS.length>SPEC_SHOW?`<button class="linkbtn more-btn" id="specMoreBtn" aria-expanded="false">Show ${SPECS.length-SPEC_SHOW} more</button>`:''}`) +
+  group('dept','Department',
+    `<div class="row-actions"><button class="linkbtn" id="deptAll">Select all</button><button class="linkbtn" id="deptNone">Deselect all</button></div>
+     <div class="checks">${DEPTS.map(d=>checkRow('dept',d,d,deptCount[d],true)).join('')}</div>`) +
+  group('units','Credits', `<div class="toggles">${UNITS.map(u=>tog('units',u,(+u).toFixed(1)+' cr',unitCount[u])).join('')}</div>`) +
+  group('term','Term part', `<div class="toggles">${TERM_ORDER.filter(t=>termCount[t]).map(t=>tog('terms',t,t,termCount[t])).join('')}</div>`) +
+  group('days','Days I can attend',
+    `<div class="toggles" id="dayToggles">${DAY_ORDER.map(d=>`<button class="tg on" data-day="${d}" aria-pressed="true">${DAY_NAME[d]}</button>`).join('')}</div>
+     <div class="hint">Turn a day off to hide sections that meet on it.</div>`) +
+  group('time','Time of day', `<div class="toggles">${TIME_ORDER.filter(t=>timeCount[t]).map(t=>tog('times',t,t,timeCount[t])).join('')}</div><div class="hint">Morning before 12pm, afternoon 12–5pm, evening 5pm and later.</div>`) +
+  group('format','Format', `<div class="toggles">${FORMATS.map(f=>tog('formats',f,f,fmtCount[f])).join('')}</div>`) +
+  group('rating','Min. course rating',
+    `<div class="range"><input type="range" id="minRating" min="${R_MIN}" max="5" step="0.1" value="${R_MIN}"><output id="minRatingOut">${R_MIN.toFixed(1)}</output></div>
+     <label class="check"><input type="checkbox" id="incNoEval" checked><span class="lbl">Include courses with no evaluation</span><span class="n">${COURSES.filter(c=>c.rating==null).length}</span></label>
+     <div class="hint">"Course overall", 2023–2026 surveys, weighted by respondents.</div>`) +
+  group('load','Workload', `<div class="toggles">${LOAD_ORDER.map(l=>tog('loads',l,l,loadCount[l])).join('')}</div><div class="hint">Thirds of the survey's hours-outside-class score (a coded scale, not literal hours).</div>`);
+
+const setMap = {units:F.units, terms:F.terms, times:F.times, formats:F.formats, loads:F.loads};
+groupsEl.addEventListener('click', e => {
+  const t = e.target.closest('[data-t]');
+  if (t){ const S=setMap[t.dataset.t], v=t.dataset.v; S.has(v)?S.delete(v):S.add(v); return update(); }
+  const d = e.target.closest('[data-day]');
+  if (d){ const v=d.dataset.day; F.days.has(v)?F.days.delete(v):F.days.add(v); return update(); }
+  if (e.target.id==='specAll'){ SPECS.forEach(x=>F.specs.add(x)); return update(); }
+  if (e.target.id==='specNone'){ F.specs.clear(); return update(); }
+  if (e.target.id==='specMoreBtn'){ const m=document.getElementById('specMore'); m.hidden=!m.hidden; e.target.textContent = m.hidden ? `Show ${SPECS.length-SPEC_SHOW} more` : 'Show less'; e.target.setAttribute('aria-expanded', String(!m.hidden)); return; }
+  if (e.target.id==='deptAll'){ DEPTS.forEach(x=>F.depts.add(x)); return update(); }
+  if (e.target.id==='deptNone'){ F.depts.clear(); return update(); }
+});
+groupsEl.addEventListener('change', e => {
+  if (e.target.dataset.f==='spec'){ e.target.checked?F.specs.add(e.target.value):F.specs.delete(e.target.value); update(); }
+  if (e.target.dataset.f==='dept'){ e.target.checked?F.depts.add(e.target.value):F.depts.delete(e.target.value); update(); }
+  if (e.target.id==='incNoEval'){ F.includeNoEval = e.target.checked; update(); }
+});
+document.getElementById('minRating').addEventListener('input', e => { F.minRating=+e.target.value; update(); });
+document.getElementById('q').addEventListener('input', e => { F.q=e.target.value.trim().toLowerCase(); update(); });
+document.getElementById('starOnly').addEventListener('change', e => { F.starOnly=e.target.checked; update(); });
+document.getElementById('sort').addEventListener('change', e => { F.sort=e.target.value; update(); });
+document.getElementById('clearAll').addEventListener('click', () => clearAll());
+document.getElementById('collapseAll').addEventListener('click', () => { openSet.clear(); renderList(); });
+const ftoggle = document.getElementById('ftoggle'), filtersEl = document.getElementById('filters');
+ftoggle.addEventListener('click', () => { const c = filtersEl.classList.toggle('closed'); ftoggle.setAttribute('aria-expanded', String(!c)); ftoggle.textContent = c ? 'Filters' : 'Hide filters'; });
+
+function clearAll(){
+  F.q=""; document.getElementById('q').value="";
+  F.starOnly=false; document.getElementById('starOnly').checked=false;
+  SPECS.forEach(x=>F.specs.add(x)); DEPTS.forEach(x=>F.depts.add(x));
+  Object.values(setMap).forEach(S=>S.clear()); DAY_ORDER.forEach(d=>F.days.add(d));
+  F.minRating=R_MIN; F.includeNoEval=true;
+  update();
+}
+
+/* ---------- filtering ---------- */
+function sectionOk(s){
+  if (F.terms.size && !F.terms.has(s.term)) return false;
+  if (F.formats.size && !F.formats.has(s.instruction_mode)) return false;
+  for (const d of s.days) if (!F.days.has(d)) return false;
+  if (F.times.size && ![...s.times].some(t=>F.times.has(t))) return false;
+  return true;
+}
+function courseOk(c){
+  if (F.starOnly && !isStarred(c)) return false;
+  if (F.q && !F.q.split(/\s+/).every(w => c.search.includes(w))) return false;
+  if (F.specs.size < SPECS.length && !c.specializations.some(s => F.specs.has(s))) return false;
+  if (!F.depts.has(c.department)) return false;
+  if (F.units.size && !F.units.has(String(c.units))) return false;
+  if (F.loads.size && !(c.load && F.loads.has(c.load))) return false;
+  if (c.rating==null){ if(!F.includeNoEval) return false; }
+  else if (c.rating < F.minRating - 1e-9) return false;
+  return c.sections.some(sectionOk);
+}
+const sorters = {
+  code:(a,b)=>a.course_code.localeCompare(b.course_code),
+  title:(a,b)=>a.title.localeCompare(b.title),
+  rating:(a,b)=>(b.rating??-1)-(a.rating??-1),
+  instr:(a,b)=>(b.instrRating??-1)-(a.instrRating??-1),
+  load:(a,b)=>(a.hours??99)-(b.hours??99)
+};
+
+/* ---------- render ---------- */
+const STAR = `<svg viewBox="0 0 24 24"><path d="M12 2.8l2.83 5.73 6.33.92-4.58 4.46 1.08 6.3L12 17.24l-5.66 2.97 1.08-6.3L2.84 9.45l6.33-.92z" fill="currentColor"/></svg>`;
+const STAR_O = `<svg viewBox="0 0 24 24"><path d="M12 2.8l2.83 5.73 6.33.92-4.58 4.46 1.08 6.3L12 17.24l-5.66 2.97 1.08-6.3L2.84 9.45l6.33-.92z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>`;
+const RANKS = { course: COURSES.map(c=>c.rating).filter(v=>v!=null).sort((a,b)=>a-b), instructor: COURSES.map(c=>c.instrRating).filter(v=>v!=null).sort((a,b)=>a-b) };
+const pctOf = (v, arr) => { let lo=0,hi=arr.length; while(lo<hi){ const m=(lo+hi)>>1; if(arr[m]<v) lo=m+1; else hi=m; } return lo/arr.length; };
+const tier = (v,label) => { if (v==null) return 'none'; const p = pctOf(v, RANKS[label]); return p>=0.8 ? 'good' : p<0.2 ? 'low' : 'mid'; };
+const tierTip = {good:'top 20% of courses', low:'bottom 20% of courses', mid:'middle 60% of courses', none:''};
+const pill = (v,label,short=label) => `<span class="pill ${tier(v,label)}" title="${label} overall (1–5)${v==null?'':' · '+tierTip[tier(v,label)]}"><b>${v==null?'–':v.toFixed(2)}</b><small>${v==null?'no eval':short}</small></span>`;
+const loadBars = l => { const n = {Low:1,Medium:2,High:3}[l]||0; return l ? `<span class="load" title="Workload: ${l} (thirds of the survey's hours-outside-class score)"><span class="ll">Workload</span><span class="dots">${[1,2,3].map(i=>`<i class="${i<=n?'f':''}"></i>`).join('')}</span><span class="lv">${l==='Medium'?'Med':l}</span></span>` : ''; };
+
+const cid = code => code.replace(/[^A-Za-z0-9]/g,'_');
+function head(c){
+  const ss = starredSecs(c);
+  const s0 = ss[0] || c.sections[0];
+  const when = s0.meetings.map(m=>fmtTime(m.days_time)).filter((v,i,a)=>a.indexOf(v)===i).slice(0,1)[0];
+  const more = c.sections.length>1 ? (ss.length && ss.length<c.sections.length ? ` <span>· ★ Sec ${ss.map(s=>esc(s.section)).join(', ')}</span>` : ` <span>+${c.sections.length-1} section${c.sections.length>2?'s':''}</span>`) : (s0.meetings.length>1 ? ' <span>+ more dates</span>' : '');
+  const terms = TERM_ORDER.filter(t=>c.terms.has(t)).map(t=>`<span class="term">${TERM_SHORT[t]}</span>`).join(' ');
+  const partial = F.specs.size < SPECS.length;
+  const ordered = partial ? [...c.specializations].sort((a,b)=>(F.specs.has(b)-F.specs.has(a))) : c.specializations;
+  const lim = openSet.has(c.course_code) ? Infinity : 3;
+  const specs = ordered.slice(0,lim).map(s=>specChip(s)).join('') + (c.specializations.length>lim ? `<span class="chip" style="--h:260;filter:saturate(0)">+${c.specializations.length-lim}</span>`:'');
+  const on = ss.length>0;
+  return `<div class="head" data-code="${c.course_code}" role="button" tabindex="0" aria-expanded="${openSet.has(c.course_code)}">
+    <button class="starbtn ${on?'on':''}" data-star="${c.course_code}" aria-pressed="${on}" aria-label="${on?'Remove star':'Star'} ${esc(c.title)}" title="${on?(c.sections.length>1?`Starred: Sec ${ss.map(s=>s.section).join(', ')} · click to unstar`:'Unstar'):(c.sections.length>1?'Star a section':'Star')}">${on?STAR:STAR_O}</button>
+    <div class="main-col">
+      <div class="title-line"><span class="code">${c.course_code}</span><span class="ttl">${esc(c.title)}</span></div>
+      <div class="meta"><span class="sep">${CORE_CODES.has(c.course_code)?'<span class="core">Core</span>':''}${(+c.units).toFixed(1)} cr ${terms}</span><span class="sep">${esc(when)}${more}</span><span class="sep">${esc([...new Set(c.sections.map(s=>s.instruction_mode))].join(' · '))}</span></div>
+      ${specs ? `<div class="spec-chips">${specs}</div>` : ''}
+    </div>
+    <div class="right">
+      <svg class="chevron" width="14" height="14" viewBox="0 0 14 14"><path d="M3 5l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+    </div>
+  </div>`;
+}
+function evalBlock(i){
+  const e = i.evaluation_2023_2026;
+  if (!e) return `<div class="instr"><div class="instr-h"><b>${esc(i.full_name || i.name)}</b></div><div class="noeval">No 2023–2026 evaluation found for this instructor and course.</div></div>`;
+  const sc = e.scores || {};
+  const rows = SCORE_KEYS.filter(k=>sc[k]!=null).map((k,idx)=>`<div class="score ${idx<2?'hl':''}"><span class="l" title="${k}">${k}</span><span class="tr"><i style="width:${Math.max(0,Math.min(100,(sc[k]-3)/2*100))}%"></i>${MEDIAN[k]!=null?`<b style="left:${Math.max(0,(MEDIAN[k]-3)/2*100)}%" title="Median across all courses: ${MEDIAN[k].toFixed(2)}"></b>`:''}</span><span class="v">${sc[k].toFixed(2)}</span></div>`).join('');
+  const hrs = sc[HOURS_KEY]!=null ? `<div class="score"><span class="l" title="Coded survey scale, not literal hours">Hours/week outside class*</span><span class="tr"><i style="width:${Math.min(100,sc[HOURS_KEY]/2.4*100)}%;background:var(--muted)"></i>${MEDIAN[HOURS_KEY]!=null?`<b style="left:${Math.min(100,MEDIAN[HOURS_KEY]/2.4*100)}%" title="Median across all courses: ${MEDIAN[HOURS_KEY].toFixed(2)}"></b>`:''}</span><span class="v">${sc[HOURS_KEY].toFixed(2)}</span></div>` : '';
+  return `<div class="instr">
+    <div class="instr-h"><b>${esc(i.full_name || i.name)}</b><span class="m">${e.respondents}/${e.enrolled} responded (${Math.round(e.response_rate*100)}%) · ${e.sections_evaluated} section${e.sections_evaluated>1?'s':''} · ${esc(e.terms)}</span></div>
+    <div class="scores">${rows}${hrs}</div>
+  </div>`;
+}
+function body(c){
+  const secs = c.sections.map(s => `<div class="section">
+      <div class="section-top">${c.sections.length>1?`<button class="secstar ${stars.has(String(s.class_nbr))?'on':''}" data-sstar="${s.class_nbr}" data-code="${c.course_code}">${stars.has(String(s.class_nbr))?'★ Starred':'☆ Star section'}</button>`:''}<span><span class="k">Section</span> ${esc(s.section)}</span><span><span class="k">Class #</span> ${s.class_nbr}</span><span>${esc(s.instruction_mode)}</span>${s.component&&s.component!=='Lecture'?`<span class="k">${esc(s.component)}</span>`:''}${s.listed_code&&s.listed_code!==c.course_code?`<span class="k">Listed as ${esc(s.listed_code)}</span>`:''}${c.terms.size>1?`<span class="term">${esc(s.term)}</span>`:''}${s.alternate_schedule?'<span class="k">Alternate schedule</span>':''}</div>
+      <div class="mtgs">${(c.sections.length===1 && s.meetings.length===1) ? `<div><span style="color:var(--muted)">Dates</span> ${esc(s.meetings[0].dates)}</div>` : s.meetings.map(m=>`<div>${esc(fmtTime(m.days_time))} <span style="color:var(--muted)">· ${esc(m.dates)}</span></div>`).join('')}</div>
+      ${s.notes?`<div class="note">${linkify(s.notes)}</div>`:''}
+      ${s.instructors.map(evalBlock).join('')}
+    </div>`).join('');
+  return `<div class="body">
+    <div><h3 class="sec-h">Description</h3><p class="desc">${linkify(c.description)||'<span class="noeval">No description.</span>'}</p></div>
+    <div class="kv">${c.prerequisites?`<div>${esc(c.prerequisites)}</div>`:''}${c.also_listed.length?`<div><span>Also listed as</span> ${esc(c.also_listed.join(', '))}</div>`:''}</div>
+    <div><h3 class="sec-h">Sections</h3><div class="sections">${secs}</div></div>
+  </div>`;
+}
+function card(c){
+  const open = openSet.has(c.course_code);
+  return `<article class="course ${open?'open':''} ${isStarred(c)?'starred':''}" id="c-${cid(c.course_code)}">${head(c)}${open?body(c):''}</article>`;
+}
+
+const listEl = document.getElementById('list');
+let current = [];
+function renderList(){
+  listEl.innerHTML = current.length ? current.map(card).join('') : `<div class="empty">No courses match these filters. <button class="linkbtn" onclick="document.getElementById('clearAll').click()">Clear all filters</button></div>`;
+}
+function rerenderCard(code){
+  const c = COURSES.find(x=>x.course_code===code);
+  const el = document.getElementById('c-'+cid(code));
+  if (el && c) el.outerHTML = card(c);
+}
+listEl.addEventListener('click', e => {
+  const sb = e.target.closest('[data-star]');
+  if (sb){ e.stopPropagation(); onStarClick(sb.dataset.star); return; }
+  const ssb = e.target.closest('[data-sstar]');
+  if (ssb){ e.stopPropagation(); const k=ssb.dataset.sstar; stars.has(k)?stars.delete(k):stars.add(k); afterStarChange(ssb.dataset.code); return; }
+  if (e.target.closest('.body')) return;
+  const h = e.target.closest('.head');
+  if (h){ const k=h.dataset.code; openSet.has(k)?openSet.delete(k):openSet.add(k); rerenderCard(k); }
+});
+listEl.addEventListener('keydown', e => {
+  if ((e.key==='Enter'||e.key===' ') && e.target.classList.contains('head')){ e.preventDefault(); e.target.click(); const k=e.target.dataset.code; document.querySelector(`#c-${cid(k)} .head`)?.focus(); }
+});
+
+function afterStarChange(code){ saveStars(); if (F.starOnly) update(); else { rerenderCard(code); renderStats(); } }
+function onStarClick(code){
+  const c = COURSES.find(x=>x.course_code===code);
+  if (isStarred(c)) { c.sections.forEach(s=>stars.delete(String(s.class_nbr))); return afterStarChange(code); }
+  if (c.sections.length===1) { stars.add(String(c.sections[0].class_nbr)); return afterStarChange(code); }
+  openSectionPicker(c);
+}
+const modal = document.getElementById('secModal');
+let modalCourse = null, lastFocus = null;
+function openSectionPicker(c){
+  modalCourse = c; lastFocus = document.activeElement;
+  document.getElementById('secModalTitle').textContent = c.title;
+  document.getElementById('secModalSub').textContent = `${c.course_code} has ${c.sections.length} sections. Which one do you want to star?`;
+  document.getElementById('secModalList').innerHTML = c.sections.map(s => {
+    const when = [...new Set(s.meetings.map(m=>fmtTime(m.days_time)))].join(' + ');
+    const dates = [...new Set(s.meetings.map(m=>m.dates))].join(', ');
+    return `<button class="secopt" data-pick="${s.class_nbr}"><span class="so-h"><b>Section ${esc(s.section)}</b><span class="term">${TERM_SHORT[s.term]}</span>${s.instruction_mode!=='In-Person'?`<span class="term">${esc(s.instruction_mode)}</span>`:''}</span><span class="so-m">${esc(when)} · ${esc(dates)}</span><span class="so-i">${esc(s.instructors.map(i=>i.full_name||i.name).join(', '))}</span></button>`;
+  }).join('');
+  modal.hidden = false;
+  modal.querySelector('.secopt')?.focus();
+}
+function closeSectionPicker(){ modal.hidden = true; modalCourse = null; lastFocus?.focus?.(); }
+modal.addEventListener('click', e => {
+  if (e.target === modal || e.target.closest('[data-close]')) return closeSectionPicker();
+  const p = e.target.closest('[data-pick]');
+  const all = e.target.closest('#secModalAll');
+  if (!modalCourse || (!p && !all)) return;
+  const code = modalCourse.course_code;
+  if (all) modalCourse.sections.forEach(s=>stars.add(String(s.class_nbr))); else stars.add(p.dataset.pick);
+  closeSectionPicker(); afterStarChange(code);
+});
+document.addEventListener('keydown', e => { if (e.key==='Escape' && !modal.hidden) closeSectionPicker(); });
+function renderStats(){
+  const sc = COURSES.filter(isStarred);
+  document.getElementById('st-n').textContent = sc.length;
+  const u = sc.reduce((a,c)=>a+ +c.units,0);
+  document.getElementById('st-u').textContent = u % 1 ? u.toFixed(1) : u;
+}
+function renderControls(){
+  document.querySelectorAll('[data-f="spec"]').forEach(i=>i.checked=F.specs.has(i.value));
+  document.querySelectorAll('[data-t]').forEach(b=>{ const on=setMap[b.dataset.t].has(b.dataset.v); b.classList.toggle('on',on); b.setAttribute('aria-pressed',on); });
+  document.querySelectorAll('[data-day]').forEach(b=>{ const on=F.days.has(b.dataset.day); b.classList.toggle('on',on); b.setAttribute('aria-pressed',on); });
+  document.querySelectorAll('[data-f="dept"]').forEach(i=>i.checked=F.depts.has(i.value));
+  const r=document.getElementById('minRating'); r.value=F.minRating; document.getElementById('minRatingOut').textContent=(+F.minRating).toFixed(1);
+  document.getElementById('incNoEval').checked=F.includeNoEval;
+  const badges = {spec:F.specs.size<SPECS.length?F.specs.size+'/'+SPECS.length:0, dept:F.depts.size<DEPTS.length?F.depts.size+'/'+DEPTS.length:0, units:F.units.size, term:F.terms.size, days:F.days.size<7?F.days.size+'/7':0, time:F.times.size, format:F.formats.size, rating:(F.minRating>R_MIN||!F.includeNoEval)?1:0, load:F.loads.size};
+  for (const [k,v] of Object.entries(badges)){ const b=document.querySelector(`[data-badge="${k}"]`); b.hidden=!v; b.textContent=v; }
+}
+function renderActive(){
+  const a = [];
+  const x = (label, act, cls="", style="") => a.push(`<span class="af ${cls}" style="${style}">${label}<button data-rm="${esc(act)}" aria-label="Remove ${label.replace(/<[^>]+>/g,'')}"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M1 1l8 8M9 1l-8 8" stroke="currentColor" stroke-width="1.6"/></svg></button></span>`);
+  if (F.q) x(`Search: “${esc(F.q)}”`, 'q');
+  if (F.starOnly) x('Starred only','star');
+  if (F.specs.size < SPECS.length){
+    if (F.specs.size && F.specs.size <= 4) F.specs.forEach(s => x(esc(s), 'spec|'+s, 'chip', `--h:${SPEC_HUE[s]}`));
+    else x(`Specializations: ${F.specs.size} of ${SPECS.length}`, 'specall');
+  }
+  if (F.depts.size<DEPTS.length) x(`Departments: ${F.depts.size} of ${DEPTS.length}`,'dept');
+  F.units.forEach(v=>x(`${(+v).toFixed(1)} cr`,'units|'+v));
+  F.terms.forEach(v=>x(esc(v),'terms|'+v));
+  if (F.days.size<7) x(`Days: ${DAY_ORDER.filter(d=>F.days.has(d)).map(d=>DAY_NAME[d]).join(', ')||'none'}`,'days');
+  F.times.forEach(v=>x(esc(v),'times|'+v));
+  F.formats.forEach(v=>x(esc(v),'formats|'+v));
+  if (F.minRating>R_MIN) x(`Rating ≥ ${(+F.minRating).toFixed(1)}`,'rating');
+  if (!F.includeNoEval) x('Hide no-eval courses','noeval');
+  F.loads.forEach(v=>x(`${v} load`,'loads|'+v));
+  const el = document.getElementById('active'); el.innerHTML = a.join('');
+  document.getElementById('clearAll').hidden = !a.length;
+}
+document.getElementById('active').addEventListener('click', e => {
+  const b = e.target.closest('[data-rm]'); if(!b) return;
+  const [k,v] = b.dataset.rm.split('|');
+  if (k==='q'){ F.q=''; document.getElementById('q').value=''; }
+  else if (k==='star'){ F.starOnly=false; document.getElementById('starOnly').checked=false; }
+  else if (k==='spec'){ F.specs.delete(v); if(!F.specs.size) SPECS.forEach(s=>F.specs.add(s)); }
+  else if (k==='specall') SPECS.forEach(s=>F.specs.add(s));
+  else if (k==='dept') DEPTS.forEach(d=>F.depts.add(d));
+  else if (k==='days') DAY_ORDER.forEach(d=>F.days.add(d));
+  else if (k==='rating') F.minRating=R_MIN;
+  else if (k==='noeval') F.includeNoEval=true;
+  else if (setMap[k]) setMap[k].delete(v);
+  update();
+});
+
+function update(){
+  current = COURSES.filter(courseOk).sort(sorters[F.sort] || sorters.code);
+  if (F.sort!=='code') { /* stable tie-break */ }
+  document.getElementById('count').innerHTML = `${current.length} <span>of ${COURSES.length} courses</span>`;
+  renderControls(); renderActive(); renderList(); renderStats();
+}
+
+document.getElementById('sub').innerHTML = `${esc(META.term)} · ${esc(META.program)} · ${COURSES.length} courses, ${COURSES.reduce((a,c)=>a+c.sections.length,0)} sections · <a href="https://amirgoldstein.github.io/Focused_Spring27/">Stern courses</a> · <a href="https://amirgoldstein.github.io/Focused_Spring27/spec/">Specializations</a>`;
+
+/* ================= Schedule tab ================= */
+const TERM_CLS = {"Full semester":"tp-full","1st half":"tp-h1","2nd half":"tp-h2","Intensive / travel":"tp-int"};
+const WD = {Su:0,M:1,T:2,W:3,R:4,F:5,Sa:6};
+const COLS = ["M","T","W","R","F","Sa","Su"];
+const HH = 60; // px per hour
+const SECTIONS = [];
+COURSES.forEach(c => c.sections.forEach(s => SECTIONS.push({c, s, key:String(s.class_nbr), multi:c.sections.length>1})));
+const validKey = k => SECTIONS.some(x=>x.key===k);
+const PLANS = (() => {
+  const saved = store.get('tmi27.plans', null);
+  if (saved && Array.isArray(saved.plans) && saved.plans.length) {
+    saved.plans.forEach(p => { p.keys = (p.keys||[]).filter(validKey); });
+    if (!saved.plans.some(p=>p.id===saved.active)) saved.active = saved.plans[0].id;
+    return saved;
+  }
+  const id = 'p' + Date.now().toString(36);
+  return { plans: [{ id, name: 'Plan 1', keys: store.get('tmi27.sched', []).filter(validKey) }], active: id };
+})();
+const activePlan = () => PLANS.plans.find(p=>p.id===PLANS.active);
+const selected = new Set(activePlan().keys);
+let renamingId = null, deletingId = null, importOpen = false, codeShown = '';
+let sq = "", showConf = false;
+const md = s => s.replace(/^0/,'').replace('/0','/');
+function parseEnd(s){ const m = s.match(/-\s*(\d{1,2}):(\d{2})\s*(am|pm)/i); if(!m) return null; let h=+m[1]%12; if(m[3].toLowerCase()==='pm') h+=12; return h*60+ +m[2]; }
+const fmtMin = m => { const h=Math.floor(m/60), mm=m%60, ap=h>=12?'pm':'am', h12=((h+11)%12)+1; return `${h12}${mm?':'+String(mm).padStart(2,'0'):''}${ap}`; };
+const instrOf = s => s.instructors.map(i=>i.full_name||i.name).join(', ');
+function dupInfo(keys=selected){
+  const by = new Map();
+  SECTIONS.filter(x=>keys.has(x.key)).forEach(x => { if(!by.has(x.c.course_code)) by.set(x.c.course_code, []); by.get(x.c.course_code).push(x); });
+  const groups = [...by.values()].filter(g=>g.length>1);
+  return { groups, keys: new Set(groups.flat().map(x=>x.key)) };
+}
+function events(keys=selected){
+  const ev = [];
+  SECTIONS.filter(x=>keys.has(x.key) && x.s.term!=='Intensive / travel').forEach(x => x.s.meetings.forEach((m,mi) => {
+    if (!m.days_time) return;
+    const st = parseStart(m.days_time), en = parseEnd(m.days_time); if (st==null||en==null) return;
+    const [a,b] = m.dates.split('-').map(d2);
+    parseDays(m.days_time.split(' ')[0]).forEach(d => {
+      const dates = new Set();
+      for (let t=new Date(a); t<=b; t.setDate(t.getDate()+1)) if (t.getDay()===WD[d]) dates.add(t.toDateString());
+      if (!dates.size) return;
+      ev.push({x, day:d, st, en, dates, range:m.dates, id:x.key+'-'+mi+'-'+d, conf:new Set()});
+    });
+  }));
+  for (let i=0;i<ev.length;i++) for (let j=i+1;j<ev.length;j++){
+    const A=ev[i], B=ev[j];
+    if (A.x.c===B.x.c || A.day!==B.day || !(A.st<B.en && B.st<A.en)) continue;
+    let shared = null; for (const d of A.dates) if (B.dates.has(d)){ shared=d; break; }
+    if (shared){ A.conf.add(B); B.conf.add(A); }
+  }
+  return ev;
+}
+function renderSchedList(){
+  const match = x => !sq || (x.c.title+' '+x.c.course_code+' '+x.c.course_code.replace('.',' ')).toLowerCase().includes(sq);
+  const item = (x, conflicted) => {
+    const s = x.s, when = [...new Set(s.meetings.map(m=>fmtTime(m.days_time)))].join(' + ');
+    return `<label class="sitem ${TERM_CLS[s.term]} ${conflicted?'x':''}" title="${esc(s.term)}">
+      <input type="checkbox" data-sk="${x.key}" ${selected.has(x.key)?'checked':''}>
+      <span class="dot"></span>
+      <span><div class="t">${esc(x.c.title)}</div><div class="m">${x.c.course_code}${x.multi?' · Sec '+esc(s.section):''}</div><div class="m">${esc(when)}</div><div class="m mi">${esc(instrOf(s))}</div></span>
+      <span class="cr">${(+x.c.units).toFixed(1)} cr</span></label>`;
+  };
+  const conflictedKeys = new Set(dupInfo().keys); events().forEach(e => { if (e.conf.size) conflictedKeys.add(e.x.key); });
+  const st = SECTIONS.filter(x => stars.has(x.key) && match(x));
+  const rest = SECTIONS.filter(x => !stars.has(x.key) && match(x)).sort((p,q)=>p.c.title.localeCompare(q.c.title));
+  document.getElementById('slist').innerHTML =
+    `<div class="sgroup-h"><span><span class="star-i">★</span> Starred</span><span>${st.length}</span></div>` +
+    (st.length ? st.map(x=>item(x, conflictedKeys.has(x.key))).join('') : `<div class="shint">${stars.size ? 'No starred course matches.' : 'Star courses in the Courses tab to pin them here.'}</div>`) +
+    `<div class="sdivider"></div><div class="sgroup-h"><span>All other courses</span><span>${rest.length}</span></div>` +
+    (rest.length ? rest.map(x=>item(x, conflictedKeys.has(x.key))).join('') : `<div class="shint">No match.</div>`);
+}
+function renderCalendar(){
+  const ev = events();
+  const DUP = dupInfo();
+  const sel = SECTIONS.filter(x=>selected.has(x.key));
+  let lo = 9*60, hi = 21*60;
+  ev.forEach(e => { lo=Math.min(lo, Math.floor(e.st/60)*60); hi=Math.max(hi, Math.ceil(e.en/60)*60); });
+  const px = m => (m-lo)/60*HH, H = px(hi) + 12;
+  let html = `<div class="cal-h"></div>` + COLS.map(d=>`<div class="cal-h ${d==='Sa'||d==='Su'?'we':''}">${DAY_NAME[d]}</div>`).join('');
+  let tl = ''; for (let m=lo; m<=hi; m+=60) tl += `<span class="tlabel" style="top:${Math.max(px(m),8)}px">${fmtMin(m)}</span>`;
+  html += `<div class="tcol" style="height:${H}px">${tl}</div>`;
+  COLS.forEach(d => {
+    const de = ev.filter(e=>e.day===d).sort((a,b)=>a.st-b.st || b.en-a.en);
+    // lane layout for visually overlapping blocks
+    let cluster=[], clEnd=-1; const clusters=[];
+    de.forEach(e => { if (e.st>=clEnd && cluster.length){ clusters.push(cluster); cluster=[]; } cluster.push(e); clEnd=Math.max(clEnd,e.en); });
+    if (cluster.length) clusters.push(cluster);
+    clusters.forEach(cl => { const lanes=[]; cl.forEach(e => { let i=lanes.findIndex(end=>end<=e.st); if(i<0){ i=lanes.length; lanes.push(0);} lanes[i]=e.en; e.lane=i; }); cl.forEach(e=>e.lanes=lanes.length); });
+    const blocks = de.map(e => {
+      const s=e.x.s, c=e.x.c, w=100/e.lanes, [a,b]=e.range.split('-');
+      const dates = a===b ? md(a) : `${md(a)}–${md(b)}`;
+      const tip = `${c.course_code} ${c.title}\n${instrOf(s)}\n${fmtMin(e.st)}–${fmtMin(e.en)} · ${e.range}` + (DUP.keys.has(e.x.key) ? `\nAnother section of this course is also selected` : '') + (e.conf.size ? `\nConflicts with: ${[...new Set([...e.conf].map(o=>o.x.c.course_code))].join(', ')}` : '');
+      return `<div class="ev ${e.en-e.st<100?'short':''} ${TERM_CLS[s.term]} ${s.term==='Intensive / travel'?'int':''} ${e.conf.size||DUP.keys.has(e.x.key)?'x':''}" style="top:${px(e.st)+1}px;height:${px(e.en)-px(e.st)-2}px;left:calc(${e.lane*w}% + 2px);width:calc(${w}% - 4px)" title="${esc(tip)}">
+        <span class="et">${esc(c.title)}</span>
+        <span class="em">${c.course_code}${e.x.multi?' · '+esc(s.section):''}</span>
+        <span class="em">${fmtMin(e.st)}–${fmtMin(e.en)}</span>
+        <span class="em ei">${esc(instrOf(s))}</span>
+        <span class="ed">${dates}</span></div>`;
+    }).join('');
+    html += `<div class="dcol ${d==='Sa'||d==='Su'?'we':''}" style="height:${H}px;--hh:${HH}px">${blocks}</div>`;
+  });
+  document.getElementById('cal').innerHTML = html;
+
+  const ints = sel.filter(x => x.s.term==='Intensive / travel')
+    .sort((p,q)=>d2(p.s.meetings[0].dates.split('-')[0]) - d2(q.s.meetings[0].dates.split('-')[0]));
+  const ilEl = document.getElementById('ilist');
+  ilEl.hidden = !ints.length;
+  ilEl.innerHTML = ints.length ? `<h3>Intensive / travel courses <span>${ints.length}</span></h3>` + ints.map(x => {
+    const mt = x.s.meetings.map(m => { const [a,b]=m.dates.split('-'); const dd = a===b ? md(a) : `${md(a)}–${md(b)}`;
+      return `<li><span class="idate">${dd}</span><span class="itime">${m.days_time ? esc(fmtTime(m.days_time)) : 'Time TBA'}</span></li>`; }).join('');
+    return `<div class="iitem ${DUP.keys.has(x.key)?'idup':''}"><div class="ihead"><b>${esc(x.c.title)}</b><span class="im">${x.c.course_code}${x.multi?' · Sec '+esc(x.s.section):''} · ${(+x.c.units).toFixed(1)} cr · ${esc(instrOf(x.s))}</span></div><ul>${mt}</ul>${x.s.notes?`<div class="inote">${linkify(x.s.notes)}</div>`:''}</div>`;
+  }).join('') : '';
+  const nt = sel.filter(x => x.s.term!=='Intensive / travel' && x.s.meetings.some(m=>!m.days_time));
+  const ntEl = document.getElementById('notime');
+  ntEl.hidden = !nt.length;
+  ntEl.innerHTML = nt.length ? 'No meeting time listed: ' + nt.map(x=>`<b>${x.c.course_code}</b> ${esc(x.c.title)} (${x.s.meetings.map(m=>m.dates).join(', ')})`).join(' · ') : '';
+
+  const pairs = new Map();
+  ev.forEach(e => e.conf.forEach(o => {
+    const k=[e.x.key,o.x.key].sort().join('|');
+    if (!pairs.has(k)) pairs.set(k,{a:e.x,b:o.x,slots:new Set()});
+    const shared=[...e.dates].filter(d=>o.dates.has(d));
+    pairs.get(k).slots.add(`${DAY_NAME[e.day]} ${fmtMin(Math.max(e.st,o.st))}–${fmtMin(Math.min(e.en,o.en))} · ${shared.length} date${shared.length>1?'s':''}`);
+  }));
+  const n = pairs.size + DUP.groups.length;
+  document.getElementById('cbar').innerHTML = `<h3>Schedule conflicts</h3><span class="cbadge ${n?'bad':''}">${n} conflict${n===1?'':'s'}</span>
+    ${n?`<button class="tg" id="cToggle">${showConf?'Hide':'Show'} conflicts</button>`:''}
+    ${n&&showConf?`<div class="clist">${DUP.groups.map(g=>`<div><b>${g[0].c.course_code}</b> ${esc(g[0].c.title)}: ${g.length} sections selected<div class="d">${g.map(x=>'Sec '+esc(x.s.section)).join(', ')} · pick one</div></div>`).join('')}${[...pairs.values()].map(p=>`<div><b>${p.a.c.course_code}</b> ${esc(p.a.c.title)} ↔ <b>${p.b.c.course_code}</b> ${esc(p.b.c.title)}<div class="d">${[...p.slots].join('; ')}</div></div>`).join('')}</div>`:''}`;
+
+  const codes = new Set(sel.map(x=>x.c.course_code));
+  document.getElementById('sCount').textContent = sel.length;
+  const cr = COURSES.filter(c=>codes.has(c.course_code)).reduce((a,c)=>a+ +c.units,0);
+  document.getElementById('sCred').textContent = cr % 1 ? cr.toFixed(1) : cr;
+}
+function planStats(p){
+  const keys = new Set(p.keys);
+  const codes = new Set(SECTIONS.filter(x=>keys.has(x.key)).map(x=>x.c.course_code));
+  const cr = COURSES.filter(c=>codes.has(c.course_code)).reduce((a,c)=>a+ +c.units,0);
+  const bad = dupInfo(keys).groups.length>0 || events(keys).some(e=>e.conf.size);
+  return { cr: cr % 1 ? cr.toFixed(1) : String(cr), bad };
+}
+function renderPlans(){
+  const el = document.getElementById('plans');
+  el.innerHTML = PLANS.plans.map(p => {
+    const on = p.id===PLANS.active, st = planStats(p);
+    if (renamingId===p.id) return `<span class="ptab on editing"><input class="pname-in" id="pnameIn" value="${esc(p.name)}" maxlength="30" aria-label="Plan name"></span>`;
+    if (deletingId===p.id) return `<span class="ptab ${on?'on':''} confirm">Delete “${esc(p.name)}”? <button class="linkbtn" data-pdel-yes="${p.id}">Yes</button><button class="linkbtn" data-pdel-no>No</button></span>`;
+    return `<span class="ptab ${on?'on':''}" data-plan="${p.id}" role="tab" tabindex="0" aria-selected="${on}" title="${on?'Double-click to rename':'Switch to this plan'}">
+      <span class="pn">${esc(p.name)}</span><span class="pc">${st.cr} cr</span>${st.bad?'<span class="pdot" title="Has conflicts"></span>':''}
+      ${on?`<button class="pedit" data-pren="${p.id}" aria-label="Rename plan" title="Rename"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>`:''}
+      ${PLANS.plans.length>1?`<button class="px" data-pdel="${p.id}" aria-label="Delete plan ${esc(p.name)}" title="Delete">×</button>`:''}</span>`;
+  }).join('') + `<button class="ptab padd" id="planAdd" aria-label="New plan" title="New plan">+</button>`;
+  const inp = document.getElementById('pnameIn'); if (inp) { inp.focus(); inp.select(); }
+  document.getElementById('planTools').innerHTML = `<button class="linkbtn" id="planCopy">Copy plan code</button><button class="linkbtn" id="planImport">${importOpen?'Cancel import':'Import plan code'}</button>`
+    + (codeShown ? `<input class="pcode" id="pcodeOut" readonly value="${esc(codeShown)}" aria-label="Plan code">` : '')
+    + (importOpen ? `<span class="pimp"><input class="pcode" id="pcodeIn" placeholder="Paste a plan code" aria-label="Paste a plan code"><button class="tg on" id="pcodeAdd">Add plan</button></span>` : '')
+    + `<span class="pmsg" id="pmsg"></span>`;
+}
+function renderSchedule(){ renderSchedList(); renderCalendar(); renderPlans(); }
+function savePlans(){ store.set('tmi27.plans', PLANS); }
+function saveSel(){ activePlan().keys = [...selected]; savePlans(); }
+function switchPlan(id){
+  PLANS.active = id; selected.clear(); activePlan().keys.forEach(k=>selected.add(k)); showConf = false; savePlans();
+}
+function nextPlanName(){ let n = PLANS.plans.length + 1; while (PLANS.plans.some(p=>p.name==='Plan '+n)) n++; return 'Plan ' + n; }
+function commitRename(save){
+  if (!renamingId) return;
+  const inp = document.getElementById('pnameIn'), p = PLANS.plans.find(x=>x.id===renamingId);
+  if (save && inp && p) { const v = inp.value.trim(); if (v) p.name = v; }
+  renamingId = null; savePlans(); renderPlans();
+}
+const planCode = p => 'S27.' + btoa(unescape(encodeURIComponent(JSON.stringify({n:p.name,k:p.keys})))).replace(/=+$/,'');
+function readPlanCode(code){
+  try { const o = JSON.parse(decodeURIComponent(escape(atob(code.trim().replace(/^S27\./,''))))); if (!Array.isArray(o.k)) return null;
+    return { name: String(o.n||'Imported plan').slice(0,30), keys: o.k.map(String).filter(validKey) }; } catch(e){ return null; }
+}
+const plansEl = document.getElementById('plans'), toolsEl = document.getElementById('planTools');
+plansEl.addEventListener('click', e => {
+  if (e.target.closest('#planAdd')) {
+    commitRename(true);
+    const p = { id: 'p' + Date.now().toString(36), name: nextPlanName(), keys: [] };
+    PLANS.plans.push(p); switchPlan(p.id); renamingId = p.id; deletingId = null; return renderSchedule();
+  }
+  const yes = e.target.closest('[data-pdel-yes]');
+  if (yes) { const id = yes.dataset.pdelYes, i = PLANS.plans.findIndex(p=>p.id===id); PLANS.plans.splice(i,1); deletingId = null;
+    if (PLANS.active===id) switchPlan(PLANS.plans[Math.max(0,i-1)].id); else savePlans(); return renderSchedule(); }
+  if (e.target.closest('[data-pdel-no]')) { deletingId = null; return renderPlans(); }
+  const del = e.target.closest('[data-pdel]'); if (del) { deletingId = del.dataset.pdel; renamingId = null; return renderPlans(); }
+  const ren = e.target.closest('[data-pren]'); if (ren) { renamingId = ren.dataset.pren; deletingId = null; return renderPlans(); }
+  const tab = e.target.closest('[data-plan]');
+  if (tab && tab.dataset.plan!==PLANS.active) { commitRename(true); deletingId = null; switchPlan(tab.dataset.plan); renderSchedule(); }
+});
+plansEl.addEventListener('dblclick', e => { const tab = e.target.closest('[data-plan]'); if (tab && !e.target.closest('button')) { renamingId = tab.dataset.plan; renderPlans(); } });
+plansEl.addEventListener('keydown', e => {
+  if (e.target.id==='pnameIn') { if (e.key==='Enter') { e.preventDefault(); commitRename(true); } else if (e.key==='Escape') commitRename(false); return; }
+  if ((e.key==='Enter'||e.key===' ') && e.target.dataset.plan) { e.preventDefault(); e.target.click(); }
+});
+plansEl.addEventListener('focusout', e => { if (e.target.id==='pnameIn') setTimeout(() => { if (renamingId && document.activeElement?.id!=='pnameIn') commitRename(true); }, 0); });
+toolsEl.addEventListener('click', e => {
+  if (e.target.id==='planCopy') {
+    const code = planCode(activePlan()); codeShown = code; importOpen = false; renderPlans();
+    const done = ok => { const m = document.getElementById('pmsg'); if (m) m.textContent = ok ? 'Copied' : 'Select the code and copy it'; const o = document.getElementById('pcodeOut'); if (o && !ok) { o.focus(); o.select(); } };
+    try { navigator.clipboard.writeText(code).then(()=>done(true), ()=>done(false)); } catch(err){ done(false); }
+    return;
+  }
+  if (e.target.id==='planImport') { importOpen = !importOpen; codeShown = ''; renderPlans(); document.getElementById('pcodeIn')?.focus(); return; }
+  if (e.target.id==='pcodeAdd') importFromInput();
+});
+toolsEl.addEventListener('keydown', e => { if (e.target.id==='pcodeIn' && e.key==='Enter') importFromInput(); });
+function importFromInput(){
+  const r = readPlanCode(document.getElementById('pcodeIn').value);
+  if (!r) { document.getElementById('pmsg').textContent = 'That code is not valid. Copy it again from "Copy plan code".'; return; }
+  let name = r.name, n = 2; while (PLANS.plans.some(p=>p.name===name)) name = `${r.name} (${n++})`;
+  const p = { id: 'p' + Date.now().toString(36), name, keys: r.keys };
+  PLANS.plans.push(p); importOpen = false; switchPlan(p.id); renderSchedule();
+}
+document.getElementById('slist').addEventListener('change', e => {
+  const k = e.target.dataset.sk; if(!k) return;
+  e.target.checked ? selected.add(k) : selected.delete(k); saveSel(); renderSchedule();
+});
+document.getElementById('sq').addEventListener('input', e => { sq = e.target.value.trim().toLowerCase(); renderSchedList(); });
+document.getElementById('sClear').addEventListener('click', () => { selected.clear(); saveSel(); renderSchedule(); });
+document.getElementById('sSelStar').addEventListener('click', () => { SECTIONS.forEach(x => { if (stars.has(x.key)) selected.add(x.key); }); saveSel(); renderSchedule(); });
+document.getElementById('cbar').addEventListener('click', e => { if (e.target.id==='cToggle'){ showConf=!showConf; renderCalendar(); } });
+
+function setTab(name){
+  document.getElementById('tab-courses').hidden = name!=='courses';
+  document.getElementById('tab-schedule').hidden = name!=='schedule';
+  document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected', String(b.dataset.tab===name)));
+  document.getElementById('ftoggle').hidden = name!=='courses';
+  store.set('tmi27.tab', name);
+  if (name==='schedule') renderSchedule();
+}
+document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
+setTab(location.hash==='#schedule' ? 'schedule' : store.get('tmi27.tab','courses'));
+if (window.matchMedia('(min-width: 901px)').matches) filtersEl.classList.remove('closed');
+update();
+})();
+</script>
+
+</body>
+</html>
